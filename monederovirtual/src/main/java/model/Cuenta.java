@@ -27,11 +27,26 @@ public class Cuenta {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    public void depositarDinero(double valorADepositar){
+    public boolean depositarDinero(double valorADepositar){
         if(valorADepositar<0){
             System.out.println("El valor a depositar tiene que ser positivo");
-            return;
+            return false;
         }
         saldo+=valorADepositar;
+        System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
+        return true;
+    }
+    public boolean retirarDinero(double valorARetirar){
+        if(valorARetirar<0){
+            System.out.println("No puede retirar un valor negativo");
+            return false;
+        }else if(saldo<valorARetirar){
+            System.out.println("No tiene saldo suficiente");
+            return false;
+        }else{
+            saldo-=valorARetirar;
+            System.out.println("Retiro exitoso");
+            return true;
+        }
     }
 }
