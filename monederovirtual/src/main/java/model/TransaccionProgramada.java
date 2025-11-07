@@ -1,4 +1,4 @@
 package model;
 
-public class TransaccionProgramada {
+public abstract class TransaccionProgramada {
 }
