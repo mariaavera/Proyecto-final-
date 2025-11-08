@@ -77,4 +77,9 @@ public class Cuenta {
         return true;
     }
 
+    public double consultaSaldo(){
+        return saldo;
+    }
+
 }
+
