@@ -39,6 +39,7 @@ public class Cuenta {
         }
         saldo+=valorADepositar;
         int puntosGanados = (int)(valorADepositar / 100) * 1;
+        cliente.agregarPuntos(puntosGanados);
         System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
         System.out.println("Tus puntos ganados fueron: "+puntosGanados);
         listaTransacciones.add(new Transaccion("DEPOSITO", valorADepositar, LocalDate.now()));
@@ -54,6 +55,7 @@ public class Cuenta {
         }else{
             saldo-=valorARetirar;
             int puntosGanados = (int)(valorARetirar / 100) * 2;
+            cliente.agregarPuntos(puntosGanados);
             System.out.println("Retiro exitoso");
             System.out.println("Puntos ganados: "+puntosGanados);
             listaTransacciones.add(new Transaccion("RETIRO", valorARetirar, LocalDate.now()));
@@ -80,6 +82,7 @@ public class Cuenta {
         this.saldo -= valor;
         destino.saldo += valor;
         int puntosGanados = (int)(valor / 100) * 3;
+        cliente.agregarPuntos(puntosGanados);
         if (this.cliente != null) {
             this.cliente.setPuntos(this.cliente.getPuntos() + puntosGanados);
         }
@@ -101,5 +104,6 @@ public class Cuenta {
             System.out.println(t);
         }
     }
+
 }
 

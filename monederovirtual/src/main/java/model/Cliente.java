@@ -10,7 +10,9 @@ public class Cliente {
         this.cuenta = cuenta;
         this.puntos = puntos;
     }
-
+    public void agregarPuntos(int puntosGanados) {
+        this.puntos += puntosGanados;
+    }
     public int getPuntos() {
         return puntos;
     }
@@ -33,5 +35,16 @@ public class Cliente {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+    public void rangoCliente(){
+        if(puntos>=0 && puntos<=500){
+            System.out.println("El rango del cliente es:Bronce");
+        }else if(puntos>=501 && puntos<=1000){
+            System.out.println("El rango del cliente es:Plata");
+        }else if(puntos>=1001 && puntos<=5000){
+            System.out.println("El rango del cliente es:Oro");
+        }else{
+            System.out.println("El rango del cliente es:Platino");
+        }
     }
 }
