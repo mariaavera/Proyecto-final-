@@ -2,10 +2,10 @@ package model;
 
 import java.time.LocalDate;
 
-public class Transaccion {
-    private String registro;
-    private double valor;
-    private LocalDate fecha;
+public abstract class Transaccion {
+    protected  String registro;
+    protected  double valor;
+    protected  LocalDate fecha;
 
     public Transaccion(String registro,double valor, LocalDate fecha ) {
         this.registro = registro;
@@ -16,4 +16,5 @@ public class Transaccion {
     public String toString() {
         return registro + " | " + valor + " | " + fecha;
     }
+    public abstract void ejecutar();
 }

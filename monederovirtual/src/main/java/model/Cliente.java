@@ -4,6 +4,7 @@ public class Cliente {
         private String nombre;
         private Cuenta cuenta;
         private int puntos;
+        private TransaccionProgramada transaccionProgramada;
 
     public Cliente(String nombre, Cuenta cuenta, int puntos) {
         this.nombre = nombre;
