@@ -38,7 +38,9 @@ public class Cuenta {
             return false;
         }
         saldo+=valorADepositar;
+        int puntosGanados = (int)(valorADepositar / 100) * 1;
         System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
+        System.out.println("Tus puntos ganados fueron: "+puntosGanados);
         listaTransacciones.add(new Transaccion("DEPOSITO", valorADepositar, LocalDate.now()));
         return true;
     }
@@ -51,7 +53,9 @@ public class Cuenta {
             return false;
         }else{
             saldo-=valorARetirar;
+            int puntosGanados = (int)(valorARetirar / 100) * 2;
             System.out.println("Retiro exitoso");
+            System.out.println("Puntos ganados: "+puntosGanados);
             listaTransacciones.add(new Transaccion("RETIRO", valorARetirar, LocalDate.now()));
             return true;
         }
