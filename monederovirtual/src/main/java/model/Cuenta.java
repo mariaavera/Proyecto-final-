@@ -1,9 +1,13 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Cuenta {
     private double saldo;
     private String numero;
     private Cliente cliente;
+    private ArrayList<Transaccion> listaTransacciones;
 
     public Cuenta(double saldo, String numero) {
         if (saldo < 0) {
@@ -35,6 +39,7 @@ public class Cuenta {
         }
         saldo+=valorADepositar;
         System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
+        listaTransacciones.add(new Transaccion("DEPOSITO", valorADepositar, LocalDate.now()));
         return true;
     }
     public boolean retirarDinero(double valorARetirar){
@@ -47,6 +52,7 @@ public class Cuenta {
         }else{
             saldo-=valorARetirar;
             System.out.println("Retiro exitoso");
+            listaTransacciones.add(new Transaccion("RETIRO", valorARetirar, LocalDate.now()));
             return true;
         }
     }
@@ -74,12 +80,22 @@ public class Cuenta {
             this.cliente.setPuntos(this.cliente.getPuntos() + puntosGanados);
         }
         System.out.println("Transferencia realizada. Puntos ganados: " + puntosGanados);
+        listaTransacciones.add(new Transaccion("TRASFERENCIA", valor, LocalDate.now()));
         return true;
     }
 
     public double consultaSaldo(){
         return saldo;
     }
-
+    public void consultaTransacciones(){
+        if (listaTransacciones.isEmpty()) {
+            System.out.println("No tienes transacciones registradas.");
+            return;
+        }
+        System.out.println("Historial de transacciones:");
+        for (Transaccion t : listaTransacciones) {
+            System.out.println(t);
+        }
+    }
 }
 

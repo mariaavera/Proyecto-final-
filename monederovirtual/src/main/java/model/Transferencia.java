@@ -1,4 +1,4 @@
 package model;
 
-public class Transferencia extends Transaccion implements SistemaPuntos{
+public class Transferencia implements SistemaPuntos{
 }
