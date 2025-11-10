@@ -97,16 +97,17 @@ public class Cuenta {
     public double consultaSaldo(){
         return saldo;
     }
-    public void consultaTransacciones(){
+    public ArrayList<Transaccion> consultaTransacciones(){
+        ArrayList<Transaccion> historial=new ArrayList<>();
         if (listaTransacciones.isEmpty()) {
             System.out.println("No tienes transacciones registradas.");
-            return;
+            return null;
         }
         System.out.println("Historial de transacciones:");
         for (Transaccion t : listaTransacciones) {
-            System.out.println(t);
+            historial.add(t);
         }
+        return historial;
     }
-
 }
 

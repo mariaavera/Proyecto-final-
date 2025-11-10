@@ -9,9 +9,8 @@ public class Deposito extends Transaccion{
         super(registro,valor,fecha);
         this.cuentaDestino = cuentaDestino;
     }
-
     @Override
-    public void ejecutar() {
+    public void ejecutar(MonederoVirtual monedero) {
         cuentaDestino.depositarDinero(valor);
     }
     @Override

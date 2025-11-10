@@ -11,7 +11,7 @@ public class Retiro extends Transaccion{
     }
 
     @Override
-    public void ejecutar() {
+    public void ejecutar(MonederoVirtual monedero) {
         cuentaOrigen.retirarDinero(valor);
     }
     @Override

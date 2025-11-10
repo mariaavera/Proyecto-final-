@@ -13,7 +13,7 @@ public class Transferencia extends Transaccion{
     }
 
     @Override
-    public void ejecutar() {
+    public void ejecutar(MonederoVirtual monedero) {
         origen.transferirDinero(destino, valor);
     }
     @Override
