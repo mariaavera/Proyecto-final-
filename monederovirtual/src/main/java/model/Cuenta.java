@@ -42,7 +42,8 @@ public class Cuenta {
         cliente.agregarPuntos(puntosGanados);
         System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
         System.out.println("Tus puntos ganados fueron: "+puntosGanados);
-        listaTransacciones.add(new Transaccion("DEPOSITO", valorADepositar, LocalDate.now()));
+        listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valorADepositar, LocalDate.now(),
+                this));
         return true;
     }
     public boolean retirarDinero(double valorARetirar){
@@ -58,7 +59,8 @@ public class Cuenta {
             cliente.agregarPuntos(puntosGanados);
             System.out.println("Retiro exitoso");
             System.out.println("Puntos ganados: "+puntosGanados);
-            listaTransacciones.add(new Transaccion("RETIRO", valorARetirar, LocalDate.now()));
+            listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valorARetirar, LocalDate.now(),
+                    this));
             return true;
         }
     }
@@ -87,7 +89,8 @@ public class Cuenta {
             this.cliente.setPuntos(this.cliente.getPuntos() + puntosGanados);
         }
         System.out.println("Transferencia realizada. Puntos ganados: " + puntosGanados);
-        listaTransacciones.add(new Transaccion("TRASFERENCIA", valor, LocalDate.now()));
+        listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valor, LocalDate.now(),
+                this));
         return true;
     }
 

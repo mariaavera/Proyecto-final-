@@ -16,5 +16,10 @@ public abstract class Transaccion {
     public String toString() {
         return registro + " | " + valor + " | " + fecha;
     }
-    public abstract void ejecutar();
+    public abstract void ejecutar(MonederoVirtual monedero);
+    public abstract String getDescripcion();
+
+    public String getRegistro() {
+        return registro;
+    }
 }

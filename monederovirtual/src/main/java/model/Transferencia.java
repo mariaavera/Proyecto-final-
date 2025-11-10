@@ -16,5 +16,9 @@ public class Transferencia extends Transaccion{
     public void ejecutar() {
         origen.transferirDinero(destino, valor);
     }
+    @Override
+    public String getDescripcion() {
+        return "Transferencia de: " + valor + " el " + fecha+",enviado a la cuenta: "+destino;
+    }
 
 }
