@@ -1,15 +1,20 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
         private String nombre;
         private Cuenta cuenta;
         private int puntos;
         private TransaccionProgramada transaccionProgramada;
+        private List<MonederoVirtual> monederos;
 
     public Cliente(String nombre, Cuenta cuenta, int puntos) {
         this.nombre = nombre;
         this.cuenta = cuenta;
         this.puntos = puntos;
+        this.monederos=new ArrayList<>();
     }
     public void agregarPuntos(int puntosGanados) {
         this.puntos += puntosGanados;
@@ -47,5 +52,9 @@ public class Cliente {
         }else{
             System.out.println("El rango del cliente es:Platino");
         }
+    }
+    public void registrarMonedero(MonederoVirtual monedero) {
+        monederos.add(monedero);
+        System.out.println("Monedero registrado correctamente: " + monedero.getNombre());
     }
 }

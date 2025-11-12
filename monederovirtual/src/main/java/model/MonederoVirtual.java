@@ -6,40 +6,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MonederoVirtual implements TransaccionProgramada{
-    private String nombre;
-    private ArrayList<Cliente> listaClientes;
-    private List<Transaccion> transProgramadas;
-    private Map<String, LocalDate> fechasProgramadas = new HashMap<>();
+public abstract class MonederoVirtual {
+    protected String nombre;
+    protected double saldo;
+    protected ArrayList<Cliente> listaClientes;
+    protected List<Transaccion> transProgramadas;
+    protected Map<String, LocalDate> fechasProgramadas = new HashMap<>();
 
-    public MonederoVirtual(String nombre) {
+    public MonederoVirtual(String nombre,double valor) {
         this.nombre = nombre;
+        this.saldo=valor;
         this.listaClientes = new ArrayList<>();
         this.transProgramadas = new ArrayList<>();
     }
-    @Override
-    public void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion) {
-        transProgramadas.add(transaccion);
-        fechasProgramadas.put(transaccion.getRegistro(), fechaEjecucion);
+
+    public String getNombre() {
+        return nombre;
     }
 
-    @Override
-    public void ejecutarTransaccionesProgramadas() {
-        LocalDate hoy = LocalDate.now();
-
-        for (Transaccion t : transProgramadas) {
-            LocalDate fecha = fechasProgramadas.get(t.getRegistro());
-
-            if (fecha != null && fecha.isEqual(hoy)) {
-                t.ejecutar(this);
-            }
-        }
-    }
-
-    @Override
-    public void cancelarTransaccionProgramada(String registro) {
-        transProgramadas.removeIf(t -> t.getRegistro().equals(registro));
-        fechasProgramadas.remove(registro);
-    }
-
+    public abstract void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion);
+    public abstract void cancelarTransaccionProgramada(String registro);
 }
