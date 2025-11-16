@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Retiro extends Transaccion{
     private Cuenta cuentaOrigen;
 
-    public Retiro(double valor, Cliente cliente, Cuenta cuentaOrigen) {
-        super(valor, cliente);
+    public Retiro(double valor, Cliente cliente, String concepto,Cuenta cuentaOrigen) {
+        super(valor, cliente,concepto);
         this.cuentaOrigen = cuentaOrigen;
     }
 

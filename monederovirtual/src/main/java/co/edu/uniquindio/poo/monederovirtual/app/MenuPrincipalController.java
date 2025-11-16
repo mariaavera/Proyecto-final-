@@ -1,10 +1,17 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.AnalizadorGastos;
+import model.Cliente;
+import model.Cuenta;
+import model.MonederoVirtual;
+
+import java.io.IOException;
 
 public class MenuPrincipalController {
 
@@ -108,6 +115,40 @@ public class MenuPrincipalController {
             Stage stage = (Stage) btnTransferirDinero.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void abrirAnalizador() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AnalizadorGastos.fxml"));
+            Scene scene = new Scene(loader.load());
+            AnalizadorGastosController controller = loader.getController();
+
+            AnalizadorGastos analizador = new AnalizadorGastos(miCuenta);
+            controller.setAnalizadorGastos(analizador);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Analizador de Gastos");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void abrirTransaccionesProgramadas() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("transaccionesProgramadas.fxml"));
+            Parent root = loader.load();
+            TransaccionProgramadaController controller = loader.getController();
+            controller.inicializarDatos(monedero, cliente);
+            Stage stage = new Stage();
+            stage.setTitle("Programar Transacción");
+            stage.setScene(new Scene(root));
+            stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

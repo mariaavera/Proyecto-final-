@@ -11,7 +11,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="521.0" scaleShape="false" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="44.0" prefHeight="102.0" prefWidth="434.0" text="Monedero Virtual" textAlignment="CENTER" textFill="#030feb" textOverrun="CENTER_ELLIPSIS">
@@ -24,7 +23,7 @@
             <Font name="Britannic Bold" size="33.0" />
          </font>
       </Label>
-      <Button fx:id="btnDepositarDinero" layoutX="167.0" layoutY="146.0" mnemonicParsing="false" onAction="#DepositarDineroaction" prefHeight="34.0" prefWidth="188.0" text="Depositar dinero">
+      <Button fx:id="btnDepositarDinero" layoutX="63.0" layoutY="136.0" mnemonicParsing="false" onAction="#DepositarDineroaction" prefHeight="34.0" prefWidth="188.0" text="Depositar dinero">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -32,32 +31,42 @@
             <Blend />
          </effect>
       </Button>
-      <Button fx:id="btnTransferirDinero" layoutX="167.0" layoutY="243.0" mnemonicParsing="false" onAction="#TransferirDineroaction" prefHeight="34.0" prefWidth="188.0" text="Transferir">
+      <Button fx:id="btnTransferirDinero" layoutX="63.0" layoutY="190.0" mnemonicParsing="false" onAction="#TransferirDineroaction" prefHeight="34.0" prefWidth="188.0" text="Transferir">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnRetirarDinero" layoutX="167.0" layoutY="190.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="34.0" prefWidth="188.0" text="Retirar dinero">
+      <Button fx:id="btnRetirarDinero" layoutX="283.0" layoutY="136.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="34.0" prefWidth="188.0" text="Retirar dinero">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnSistemaPuntos" layoutX="167.0" layoutY="296.0" mnemonicParsing="false" onAction="#SistemaPuntosaction" prefHeight="34.0" prefWidth="188.0" text="Sistema Puntos">
+      <Button fx:id="btnSistemaPuntos" layoutX="63.0" layoutY="241.0" mnemonicParsing="false" onAction="#SistemaPuntosaction" prefHeight="34.0" prefWidth="188.0" text="Sistema Puntos">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnConsultaSaldo" layoutX="167.0" layoutY="346.0" mnemonicParsing="false" onAction="#ConsultaSaldoaction" prefHeight="34.0" prefWidth="188.0" text="Consultar Saldo">
+      <Button fx:id="btnConsultaSaldo" layoutX="283.0" layoutY="190.0" mnemonicParsing="false" onAction="#ConsultaSaldoaction" prefHeight="34.0" prefWidth="188.0" text="Consultar Saldo">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnSalir" layoutX="167.0" layoutY="463.0" mnemonicParsing="false" onAction="#Saliraction" prefHeight="34.0" prefWidth="188.0" text="Salir">
+      <Button fx:id="btnSalir" layoutX="167.0" layoutY="347.0" mnemonicParsing="false" onAction="#Saliraction" prefHeight="34.0" prefWidth="188.0" text="Salir">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnConsultaHistorial" layoutX="167.0" layoutY="404.0" mnemonicParsing="false" onAction="#ConsultaHistorialaction" prefHeight="34.0" prefWidth="188.0" text="Consultar Historial">
+      <Button fx:id="btnConsultaHistorial" layoutX="283.0" layoutY="241.0" mnemonicParsing="false" onAction="#ConsultaHistorialaction" prefHeight="34.0" prefWidth="188.0" text="Consultar Historial">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAnalizadorGastos" layoutX="63.0" layoutY="292.0" mnemonicParsing="false" onAction="#AnalizadorGastosaction" prefHeight="34.0" prefWidth="188.0" text="Analizar Gastos">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnProgramarTransaccion" layoutX="283.0" layoutY="292.0" mnemonicParsing="false" onAction="#ProgramarTransaccionaction" prefHeight="34.0" prefWidth="188.0" text="Programar Transacción">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

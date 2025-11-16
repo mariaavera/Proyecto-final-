@@ -5,10 +5,10 @@ public class Transferencia extends Transaccion{
     private Cuenta cuentaDestino;
     private double comisionBase = 0.02;
 
-    public Transferencia(double monto, Cliente cliente,
+    public Transferencia(double monto, Cliente cliente,String concepto,
                          Cuenta cuentaOrigen, Cuenta cuentaDestino) {
 
-        super(monto, cliente);
+        super(monto, cliente,concepto);
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
     }

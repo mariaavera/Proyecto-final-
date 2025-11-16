@@ -8,13 +8,32 @@ public abstract class Transaccion {
     protected LocalDate fecha;
     protected String id;
     protected Cliente cliente;
+    protected String concepto;
 
-    public Transaccion(double valor,Cliente cliente) {
+    public Transaccion(double valor,Cliente cliente,String concepto) {
         this.valor = valor;
         this.fecha = LocalDate.now();
         this.id = generarId();
         this.cliente = cliente;
+        this.concepto=concepto;
     }
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     private String generarId() {
         return "TX-" + System.currentTimeMillis();
     }

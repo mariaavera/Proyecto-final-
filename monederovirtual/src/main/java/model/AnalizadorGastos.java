@@ -24,6 +24,15 @@ public class AnalizadorGastos {
 
         return total;
     }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
     public double calcularPromedioGastoMensual(int año) {
         double total = 0;
         int mesesConGasto = 0;
