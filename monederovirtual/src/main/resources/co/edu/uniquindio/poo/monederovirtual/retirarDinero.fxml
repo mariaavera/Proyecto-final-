@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.RetirarDineroController">
    <children>
-      <Label layoutX="14.0" layoutY="29.0" prefHeight="117.0" prefWidth="404.0" text="Retiro de dinero" textAlignment="CENTER" textFill="#0900ff">
+      <Label layoutX="102.0" layoutY="-29.0" prefHeight="117.0" prefWidth="280.0" text="Retiro de dinero" textAlignment="CENTER" textFill="#0900ff">
          <font>
-            <Font name="System Bold" size="48.0" />
+            <Font name="System Bold" size="35.0" />
          </font>
       </Label>
       <TextField fx:id="txtRetirarDinero" layoutX="82.0" layoutY="127.0" prefHeight="38.0" prefWidth="240.0" promptText="Valor a retirar ">
@@ -25,5 +26,6 @@
       </Button>
       <Label fx:id="lblMensaje" layoutX="37.0" layoutY="251.0" prefHeight="46.0" prefWidth="330.0" />
       <Button fx:id="btnVolver" layoutX="20.0" layoutY="17.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
+      <ComboBox fx:id="comboCuentas" layoutX="82.0" layoutY="63.0" prefHeight="38.0" prefWidth="240.0" promptText="Elección cuenta" />
    </children>
 </AnchorPane>

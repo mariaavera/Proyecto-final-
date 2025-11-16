@@ -19,6 +19,12 @@ public class SistemaPuntosController {
 
     @FXML
     private TextField txtPuntosACanjear;
+    private Cliente cliente;
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        inicializarDatos(cliente);
+    }
 
     public void inicializarDatos(Cliente cliente) {
         this.clienteActivo = cliente;

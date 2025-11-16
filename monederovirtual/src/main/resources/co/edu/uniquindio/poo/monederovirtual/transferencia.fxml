@@ -29,6 +29,6 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <ComboBox layoutX="82.0" layoutY="86.0" prefHeight="35.0" prefWidth="303.0" promptText="Cuenta Origen" />
+      <ComboBox fx:id="txtCuentaOrigen" layoutX="82.0" layoutY="86.0" prefHeight="35.0" prefWidth="303.0" promptText="Cuenta Origen" />
    </children>
 </AnchorPane>

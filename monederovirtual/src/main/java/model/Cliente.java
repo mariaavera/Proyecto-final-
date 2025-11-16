@@ -26,7 +26,14 @@ public class Cliente {
                 GenerarCuentas.generarNumero(),
                 this));
     }
-
+    public void crearNuevaCuenta() {
+        Cuenta cuentaNueva = new Cuenta(
+                0.0,
+                GenerarCuentas.generarNumero(),
+                this
+        );
+        this.cuentas.add(cuentaNueva);
+    }
     public String getCedula() {
         return cedula;
     }

@@ -11,36 +11,34 @@ import javafx.scene.control.Label;
 
 public class TransferenciaController {
 
-    @FXML private ComboBox<String> cboCuentasOrigen; // mostrará número de cuenta
-    @FXML private TextField txtMonto;
-    @FXML private TextField txtCuentaDestino;
+    @FXML private ComboBox<String> txtCuentaOrigen;
+    @FXML private TextField txtValorATransferir;
+    @FXML private TextField txtCuentaDestinatario;
     @FXML private Label lblMensaje;
 
     private Cuenta cuentaOrigen;
 
-    // este método lo llamas desde el controlador que abre la vista, y le pasas el cliente actual
     public void inicializarConCliente(Cliente cliente){
-        // cargar cuentas en el combo
-        cboCuentasOrigen.getItems().clear();
+        txtCuentaOrigen.getItems().clear();
         for(Cuenta c : cliente.getCuentas()){
-            cboCuentasOrigen.getItems().add(c.getId());
+            txtCuentaOrigen.getItems().add(c.getId());
         }
-        if(!cboCuentasOrigen.getItems().isEmpty()){
-            cboCuentasOrigen.getSelectionModel().selectFirst();
+        if(!txtCuentaOrigen.getItems().isEmpty()){
+            txtCuentaOrigen.getSelectionModel().selectFirst();
         }
     }
 
     @FXML
     public void TransferirDineroaction(){
         try{
-            String numeroOrigen = cboCuentasOrigen.getValue();
+            String numeroOrigen = txtCuentaOrigen.getValue();
             if(numeroOrigen == null){
                 lblMensaje.setText("Seleccione la cuenta origen.");
                 return;
             }
             cuentaOrigen = BaseInformaciónCliente.buscarCuentaPorNumero(numeroOrigen);
-            double monto = Double.parseDouble(txtMonto.getText().trim().replace(",", "."));
-            String numeroDestino = txtCuentaDestino.getText().trim();
+            double monto = Double.parseDouble(txtValorATransferir.getText().trim().replace(",", "."));
+            String numeroDestino = txtCuentaDestinatario.getText().trim();
 
             Cuenta cuentaDestino = BaseInformaciónCliente.buscarCuentaPorNumero(numeroDestino);
             if(cuentaDestino == null){

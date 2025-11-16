@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import model.*;
 
 public class RegistroController {
+
     @FXML
     private TextField txtNombre;
 
@@ -46,17 +47,26 @@ public class RegistroController {
             lblMensaje.setText("Las contraseñas no coinciden.");
             return;
         }
-        Cuenta cuenta = new Cuenta(0, generarNumeroCuenta(),null);
-        Cliente cliente = new Cliente(nombre, cedula, pass, cuenta, 0);
-        cuenta.setCliente(cliente);
-        cliente.setCuenta(cuenta);
+
+        Cliente cliente = new Cliente(nombre, cedula, pass, 0);
+
+        Cuenta cuenta = new Cuenta(
+                0,
+                generarNumeroCuenta(),
+                cliente
+        );
+
+        cliente.getCuentas().add(cuenta);
+
         MonederoIndividual principal = new MonederoIndividual("Principal", 0);
         MonederoIndividual ahorros   = new MonederoIndividual("Ahorros", 0);
         MonederoIndividual gastos    = new MonederoIndividual("Gastos", 0);
         Multimonedero multimonedero = new Multimonedero("Multimonedero", 0);
+
         multimonedero.agregarMonedero(principal);
         multimonedero.agregarMonedero(ahorros);
         multimonedero.agregarMonedero(gastos);
+
         cliente.registrarMonedero(principal);
         cliente.registrarMonedero(ahorros);
         cliente.registrarMonedero(gastos);

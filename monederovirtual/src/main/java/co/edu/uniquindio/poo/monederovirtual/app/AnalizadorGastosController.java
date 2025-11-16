@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import model.AnalizadorGastos;
+import model.Cliente;
 import model.Transaccion;
 
 import java.time.LocalDate;
@@ -46,11 +47,13 @@ public class AnalizadorGastosController {
         private TableView<Transaccion> tableGastos;
 
         private AnalizadorGastos analizador;
+        private Cliente cliente;
 
-        public void setAnalizadorGastos(AnalizadorGastos analizador) {
-            this.analizador = analizador;
-            inicializarVista();
-        }
+        public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        inicializarVista();
+    }
+
 
         private void inicializarVista() {
 

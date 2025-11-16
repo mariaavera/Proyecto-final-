@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,25 +16,34 @@ public class DepositarDineroController {
 
     @FXML private TextField txtDepositoDinero;
     @FXML private Label lblMensaje;
+    @FXML private ComboBox<Cuenta> cbCuentaDeposito;
 
     private Cliente cliente;
-    private Cuenta cuentaActiva;
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        this.cuentaActiva = cliente.getCuenta();
+        cbCuentaDeposito.getItems().addAll(cliente.getCuentas());
     }
 
     @FXML
     public void DepositarDineroaction() {
         try {
+            Cuenta cuentaSeleccionada = cbCuentaDeposito.getValue();
+
+            if (cuentaSeleccionada == null) {
+                lblMensaje.setText("Selecciona una cuenta para depositar.");
+                return;
+            }
+
             double monto = Double.parseDouble(txtDepositoDinero.getText());
-            String resultado = cuentaActiva.depositarDinero(monto);
+            String resultado = cuentaSeleccionada.depositarDinero(monto);
             lblMensaje.setText(resultado);
+
         } catch (NumberFormatException e) {
-            lblMensaje.setText("Error: ingrese un número válido");
+            lblMensaje.setText("Error: ingrese un número válido.");
         }
     }
+
     @FXML
     private void Volveraction() {
         try {
@@ -44,12 +54,13 @@ public class DepositarDineroController {
             Parent root = loader.load();
             MenuPrincipalController menuController = loader.getController();
             menuController.setCliente(cliente);
+
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");
             stage.setScene(new Scene(root));
             stage.show();
-            ((Stage) txtDepositoDinero.getScene().getWindow()).close();
 
+            ((Stage) txtDepositoDinero.getScene().getWindow()).close();
         } catch (Exception e) {
             e.printStackTrace();
         }
