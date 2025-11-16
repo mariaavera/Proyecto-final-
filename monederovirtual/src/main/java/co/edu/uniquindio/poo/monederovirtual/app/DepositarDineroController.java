@@ -3,37 +3,33 @@ package co.edu.uniquindio.poo.monederovirtual.app;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Cliente;
 import model.Cuenta;
 import model.MonederoVirtual;
 
 public class DepositarDineroController {
 
-    @FXML
-    private TextField txtMonto;
+    @FXML private TextField txtDepositoDinero;
+    @FXML private Label lblMensaje;
 
-    @FXML
-    private Label lblMensaje;
-
+    private Cliente cliente;
     private Cuenta cuentaActiva;
 
-    public void inicializarDatos(Cuenta cuenta) {
-        this.cuentaActiva = cuenta;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        this.cuentaActiva = cliente.getCuenta();
     }
+
     @FXML
     public void DepositarDineroaction() {
+        System.out.println("Texto actual = '" + txtDepositoDinero.getText() + "'");
         try {
-            double valor = Double.parseDouble(txtMonto.getText());
-
-            boolean exito = cuentaActiva.depositarDinero(valor);
-
-            if (exito) {
-                lblMensaje.setText("Depósito exitoso.");
-            } else {
-                lblMensaje.setText("No se pudo realizar el depósito.");
-            }
-
-        } catch (NumberFormatException e) {
-            lblMensaje.setText("Ingrese un número válido.");
+            double monto = Double.parseDouble(txtDepositoDinero.getText());
+            cuentaActiva.depositarDinero(monto);
+            lblMensaje.setText("Depósito exitoso");
+        } catch (Exception e) {
+            lblMensaje.setText("ERROR REAL: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

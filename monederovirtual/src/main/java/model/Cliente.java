@@ -18,6 +18,7 @@ public class Cliente {
     public Cliente(String nombre, String cedula, String contrasena, Cuenta cuenta, int puntos) {
         this.nombre = nombre;
         this.cedula=cedula;
+        this.contrasena=contrasena;
         this.cuenta = cuenta;
         this.puntos = puntos;
         this.monederos=new ArrayList<>();

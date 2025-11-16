@@ -40,7 +40,9 @@ public class MenuPrincipalController {
     @FXML
     void ConsultaHistorialaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaHistorial.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/ConsultarHistorial.fxml")
+            );
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnConsultaHistorial.getScene().getWindow();
             stage.setScene(scene);
@@ -49,11 +51,17 @@ public class MenuPrincipalController {
             e.printStackTrace();
         }
     }
+    private Cliente clienteActual;
 
+    public void setCliente(Cliente cliente) {
+        this.clienteActual = cliente;
+    }
     @FXML
     void ConsultaSaldoaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaSaldo.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/ConsultarSaldo.fxml")
+            );
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnConsultaSaldo.getScene().getWindow();
             stage.setScene(scene);
@@ -66,20 +74,29 @@ public class MenuPrincipalController {
     @FXML
     void DepositarDineroaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DepositarDinero.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) btnDepositarDinero.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/DepositarDinero.fxml")
+            );
+                    Parent root = loader.load();
+
+                    DepositarDineroController controller = loader.getController();
+                    controller.setCliente(clienteActual);
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
     @FXML
     void RetirarDineroaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RetirarDinero.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/RetirarDinero.fxml")
+            );
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnRetirarDinero.getScene().getWindow();
             stage.setScene(scene);
@@ -98,7 +115,9 @@ public class MenuPrincipalController {
     @FXML
     void SistemaPuntosaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SistemaPuntos.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/SistemaPuntos.fxml")
+            );
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnSistemaPuntos.getScene().getWindow();
             stage.setScene(scene);
@@ -111,7 +130,9 @@ public class MenuPrincipalController {
     @FXML
     void TransferirDineroaction(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("TransferirDinero.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/Transferencia.fxml")
+            );
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) btnTransferirDinero.getScene().getWindow();
             stage.setScene(scene);
@@ -123,7 +144,9 @@ public class MenuPrincipalController {
     @FXML
     private void AnalizadorGastosaction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AnalizadorGastos.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/AnalizadorGasto.fxml")
+            );
             Scene scene = new Scene(loader.load());
             AnalizadorGastosController controller = loader.getController();
 
@@ -141,7 +164,9 @@ public class MenuPrincipalController {
     @FXML
     public void ProgramarTransaccionaction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("transaccionesProgramadas.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/ProgramarTransaccion.fxml")
+            );
             Parent root = loader.load();
             TransaccionProgramadaController controller = loader.getController();
             controller.inicializarDatos(cliente.getMonederoPrincipal(), cliente);
@@ -155,10 +180,6 @@ public class MenuPrincipalController {
         }
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-        inicializarMenu();
-    }
     private void inicializarMenu() {
         System.out.println("Usuario: " + cliente.getNombre());
         System.out.println("Puntos: " + cliente.getPuntos());

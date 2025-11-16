@@ -14,7 +14,7 @@ import model.Cliente;
 
 public class IniciarSesionController {
     @FXML
-    private TextField txtCedula;
+    private TextField txtUsuario;
 
     @FXML
     private PasswordField txtContrasena;
@@ -27,7 +27,7 @@ public class IniciarSesionController {
 
     @FXML
     private void IniciarSesionaction() {
-        String cedula = txtCedula.getText();
+        String cedula = txtUsuario.getText();
         String pass = txtContrasena.getText();
         if (cedula.isEmpty() || pass.isEmpty()) {
             lblMensaje.setText("Completa todos los campos.");
@@ -39,13 +39,15 @@ public class IniciarSesionController {
             lblMensaje.setText("Cédula o contraseña incorrecta.");
             return;
         }
-        abrirMenu(cliente);
         ((Stage) btnIngresar.getScene().getWindow()).close();
+        abrirMenu(cliente);
     }
 
     private void abrirMenu(Cliente cliente) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        try {FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
+        );
+
             Parent root = loader.load();
             MenuPrincipalController menuController = loader.getController();
             menuController.setCliente(cliente);

@@ -9,12 +9,14 @@ public class Aplicacion extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/Login.fxml")
         );
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Monedero Virtual");
+
+        Scene scene = new Scene(loader.load());
         stage.setScene(scene);
+        stage.setTitle("Monedero Virtual");
         stage.show();
     }
 

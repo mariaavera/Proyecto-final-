@@ -73,22 +73,14 @@ public class AnalizadorGastosController {
             String categoriaSeleccionada = comboCategoria.getValue();
 
             List<Transaccion> transacciones = analizador.getCuenta().consultaTransacciones();
-
-            // Filtrar por mes y categoría
             List<Transaccion> filtradas = transacciones.stream()
                     .filter(t -> t.getFecha().getMonthValue() == mesSeleccionado)
                     .filter(t -> categoriaSeleccionada == null || t.getClass().getSimpleName().equals(categoriaSeleccionada))
                     .toList();
-
-            // Actualizar tabla
             tableGastos.setItems(FXCollections.observableArrayList(filtradas));
-
-            // Actualizar pie chart
             pieChartGastos.getData().clear();
             double total = filtradas.stream().mapToDouble(Transaccion::getValor).sum();
             pieChartGastos.getData().add(new PieChart.Data(categoriaSeleccionada != null ? categoriaSeleccionada : "Todos", total));
-
-            // Actualizar labels
             lblTotal.setText("Total: " + total);
             lblPromedio.setText("Promedio mensual: " + analizador.calcularPromedioGastoMensual(LocalDate.now().getYear()));
         }

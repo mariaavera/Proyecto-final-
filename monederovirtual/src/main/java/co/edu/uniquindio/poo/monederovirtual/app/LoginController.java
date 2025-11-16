@@ -16,17 +16,19 @@ public class LoginController {
 
     @FXML
     private void Registrarseaction() {
-        abrirVentana("Registro.fxml", "Crear cuenta");
+        abrirVentana("/co/edu/uniquindio/poo/monederovirtual/Registro.fxml",
+                "Crear cuenta");
     }
 
     @FXML
     private void IniciarSesionaction() {
-        abrirVentana("Login.fxml", "Iniciar Sesión");
+        abrirVentana("/co/edu/uniquindio/poo/monederovirtual/IniciarSesion.fxml",
+                "Iniciar Sesión");
     }
 
-    private void abrirVentana(String fxml, String titulo) {
+    private void abrirVentana(String ruta, String titulo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(ruta));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -36,6 +38,7 @@ public class LoginController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("ERROR: No se pudo cargar " + ruta);
         }
     }
 }

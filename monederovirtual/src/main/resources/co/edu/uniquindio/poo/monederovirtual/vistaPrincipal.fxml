@@ -72,20 +72,6 @@
          </font>
       </Button>
    </children>
-   <effect>
-      <Lighting>
-         <bumpInput>
-            <Shadow height="167.55" radius="57.63" width="64.97">
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </Shadow>
-         </bumpInput>
-         <light>
-            <Distant />
-         </light>
-      </Lighting>
-   </effect>
    <cursor>
       <Cursor fx:constant="H_RESIZE" />
    </cursor>
