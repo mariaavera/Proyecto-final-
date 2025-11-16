@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Cuenta {
     private double saldo;
-    private String numero;
+    private String id;
     private Cliente cliente;
     private ArrayList<Transaccion> listaTransacciones;
 
@@ -14,7 +14,7 @@ public class Cuenta {
             throw new IllegalArgumentException("El saldo no puede ser negativo");
         }
         this.saldo = saldo;
-        this.numero = numero;
+        this.id = numero;
     }
 
     public double getSaldo() {
@@ -25,12 +25,12 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getId() {
+        return id;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setId(String id) {
+        this.id = id;
     }
     public boolean depositarDinero(double valorADepositar){
         if(valorADepositar<0){
@@ -42,8 +42,7 @@ public class Cuenta {
         cliente.agregarPuntos(puntosGanados);
         System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
         System.out.println("Tus puntos ganados fueron: "+puntosGanados);
-        listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valorADepositar, LocalDate.now(),
-                this));
+        listaTransacciones.add(new Deposito(valorADepositar, cliente, this));
         return true;
     }
     public boolean retirarDinero(double valorARetirar){
@@ -59,8 +58,7 @@ public class Cuenta {
             cliente.agregarPuntos(puntosGanados);
             System.out.println("Retiro exitoso");
             System.out.println("Puntos ganados: "+puntosGanados);
-            listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valorARetirar, LocalDate.now(),
-                    this));
+            listaTransacciones.add(new Retiro(valorARetirar, cliente, this));
             return true;
         }
     }
@@ -89,8 +87,7 @@ public class Cuenta {
             this.cliente.setPuntos(this.cliente.getPuntos() + puntosGanados);
         }
         System.out.println("Transferencia realizada. Puntos ganados: " + puntosGanados);
-        listaTransacciones.add(new Deposito("DEP-" + listaTransacciones.size() + 1, valor, LocalDate.now(),
-                this));
+        listaTransacciones.add(new Transferencia(valor, cliente, this,destino));
         return true;
     }
 

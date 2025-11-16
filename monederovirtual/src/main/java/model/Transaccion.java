@@ -1,26 +1,32 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class Transaccion {
-    protected  String registro;
-    protected  double valor;
-    protected  LocalDate fecha;
+    protected double valor;
+    protected LocalDate fecha;
+    protected String id;
+    protected Cliente cliente;
 
-    public Transaccion(String registro,double valor, LocalDate fecha ) {
-        this.registro = registro;
-        this.fecha = fecha;
+    public Transaccion(double valor,Cliente cliente) {
         this.valor = valor;
+        this.fecha = LocalDate.now();
+        this.id = generarId();
+        this.cliente = cliente;
+    }
+    private String generarId() {
+        return "TX-" + System.currentTimeMillis();
     }
     @Override
     public String toString() {
-        return registro + " | " + valor + " | " + fecha;
+        return id + " | " + valor + " | " + fecha;
     }
     public abstract void ejecutar(MonederoVirtual monedero);
     public abstract String getDescripcion();
 
-    public String getRegistro() {
-        return registro;
+    public String getId() {
+        return id;
     }
 
     public LocalDate getFecha() {
@@ -35,7 +41,11 @@ public abstract class Transaccion {
         return valor;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

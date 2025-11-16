@@ -5,10 +5,19 @@ import java.time.LocalDate;
 public class Deposito extends Transaccion{
     private Cuenta cuentaDestino;
 
-    public Deposito(String registro,double valor, LocalDate fecha, Cuenta cuentaDestino) {
-        super(registro,valor,fecha);
+    public Deposito(double valor, Cliente cliente, Cuenta cuentaDestino) {
+        super(valor, cliente);
         this.cuentaDestino = cuentaDestino;
     }
+
+    public Cuenta getCuentaDestino() {
+        return cuentaDestino;
+    }
+
+    public void setCuentaDestino(Cuenta cuentaDestino) {
+        this.cuentaDestino = cuentaDestino;
+    }
+
     @Override
     public void ejecutar(MonederoVirtual monedero) {
         cuentaDestino.depositarDinero(valor);

@@ -4,6 +4,7 @@ module co.edu.uniquindio.poo.monederovirtual {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires java.desktop;
 
     opens co.edu.uniquindio.poo.monederovirtual to javafx.fxml;
     exports co.edu.uniquindio.poo.monederovirtual;
