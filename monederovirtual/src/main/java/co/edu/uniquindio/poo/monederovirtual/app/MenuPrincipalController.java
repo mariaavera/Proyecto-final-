@@ -1,26 +1,18 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Cliente;
-
-import java.io.IOException;
 
 public class MenuPrincipalController {
-    private Cliente cliente;
-    public void inicializarCliente(Cliente cliente){
-        this.cliente = cliente;
-    }
 
     @FXML
-    private Button btnConsultarPuntos;
+    private Button btnConsultaHistorial;
 
     @FXML
-    private Button btnConsultarRango;
+    private Button btnConsultaSaldo;
 
     @FXML
     private Button btnDepositarDinero;
@@ -32,53 +24,92 @@ public class MenuPrincipalController {
     private Button btnSalir;
 
     @FXML
+    private Button btnSistemaPuntos;
+
+    @FXML
     private Button btnTransferirDinero;
 
     @FXML
-    void ConsultarPuntosaction(ActionEvent event) {
-        System.out.println("Consultar puntos");
-        // Aquí llamas la ventana de puntos
-    }
-
-    @FXML
-    void ConsultarRangoaction(ActionEvent event) {
-        System.out.println("Consultar rango");
-    }
-
-    @FXML
-    void DepositarDineroaction(ActionEvent event) {
+    void ConsultaHistorialAction(ActionEvent event) {
         try {
-            abrirDepositar();
-        } catch (IOException e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaHistorial.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnConsultaHistorial.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void RetirarDineroaction(ActionEvent event) {
-        System.out.println("Retirar dinero");
+    void ConsultaSaldoAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaSaldo.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnConsultaSaldo.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void Saliraction(ActionEvent event) {
-        System.out.println("Salir del programa");
-        System.exit(0);
+    void DepositarDineroAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DepositarDinero.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnDepositarDinero.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void TransferirDineroaction(ActionEvent event) {
-        System.out.println("Transferir dinero");
+    void RetirarDineroAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RetirarDinero.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnRetirarDinero.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    @FXML
-    public void abrirDepositar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("depositarDinero.fxml"));
-        Parent root = loader.load();
-        DepositarDineroController controller = loader.getController();
-        controller.inicializarDatos(cliente.getCuenta());
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+    @FXML
+    void SalirAction(ActionEvent event) {
+        Stage stage = (Stage) btnSalir.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void SistemaPuntosAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SistemaPuntos.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnSistemaPuntos.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void TransferirDineroAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TransferirDinero.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) btnTransferirDinero.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-

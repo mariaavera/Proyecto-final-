@@ -44,6 +44,7 @@ public abstract class MonederoVirtual {
         this.listaClientes = listaClientes;
     }
 
+
     public abstract void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion);
     public abstract void cancelarTransaccionProgramada(String registro);
 }

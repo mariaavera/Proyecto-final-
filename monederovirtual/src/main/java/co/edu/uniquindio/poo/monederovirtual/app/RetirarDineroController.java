@@ -2,9 +2,7 @@ package co.edu.uniquindio.poo.monederovirtual.app;
 
 import javafx.fxml.FXML;
 import model.Cuenta;
-
 import java.awt.*;
-import java.lang.classfile.Label;
 
 public class RetirarDineroController {
     @FXML
@@ -33,5 +31,4 @@ public class RetirarDineroController {
             lblMensaje.setText("Ingrese un número válido.");
         }
     }
-}
 }

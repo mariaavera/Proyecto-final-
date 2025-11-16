@@ -7,22 +7,27 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="14.0" prefHeight="117.0" prefWidth="404.0" text="Retiro de dinero" textAlignment="CENTER" textFill="#0900ff">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="txtRetirarDinero" layoutX="83.0" layoutY="125.0" prefHeight="38.0" prefWidth="240.0" promptText="Valor a retirar ">
+      <TextField fx:id="txtRetirarDinero" layoutX="83.0" layoutY="98.0" prefHeight="38.0" prefWidth="240.0" promptText="Valor a retirar ">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="btnRetirarDinero" layoutX="136.0" layoutY="199.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="46.0" prefWidth="133.0" text="Retirar">
+      <Button fx:id="btnRetirarDinero" layoutX="136.0" layoutY="155.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="46.0" prefWidth="133.0" text="Retirar">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
+      <Label fx:id="lblMensaje" layoutX="115.0" layoutY="226.0" prefHeight="38.0" prefWidth="174.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
