@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Multimonedero extends MonederoVirtual implements TransaccionProgramada{
-    protected List<MonederoVirtual> monederos;
+    private List<MonederoVirtual> monederos;
     private Cuenta cuentaOrigen;
     private Cuenta cuentaDestino;
     private Transaccion transaccion;
@@ -13,6 +13,13 @@ public class Multimonedero extends MonederoVirtual implements TransaccionProgram
     public Multimonedero(String id, double valor) {
         super(id, valor);
         this.monederos=new ArrayList<>();
+    }
+    public void agregarMonedero(MonederoVirtual m) {
+        monederos.add(m);
+    }
+
+    public List<MonederoVirtual> getMonederos() {
+        return new ArrayList<>(monederos);
     }
     @Override
     public void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion) {

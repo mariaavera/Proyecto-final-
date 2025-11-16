@@ -14,6 +14,7 @@ import model.MonederoVirtual;
 import java.io.IOException;
 
 public class MenuPrincipalController {
+    private Cliente cliente;
 
     @FXML
     private Button btnConsultaHistorial;
@@ -126,7 +127,7 @@ public class MenuPrincipalController {
             Scene scene = new Scene(loader.load());
             AnalizadorGastosController controller = loader.getController();
 
-            AnalizadorGastos analizador = new AnalizadorGastos(miCuenta);
+            AnalizadorGastos analizador = new AnalizadorGastos(cliente.getCuenta());
             controller.setAnalizadorGastos(analizador);
 
             Stage stage = new Stage();
@@ -143,7 +144,7 @@ public class MenuPrincipalController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("transaccionesProgramadas.fxml"));
             Parent root = loader.load();
             TransaccionProgramadaController controller = loader.getController();
-            controller.inicializarDatos(monedero, cliente);
+            controller.inicializarDatos(cliente.getMonederoPrincipal(), cliente);
             Stage stage = new Stage();
             stage.setTitle("Programar Transacción");
             stage.setScene(new Scene(root));
@@ -153,4 +154,13 @@ public class MenuPrincipalController {
             e.printStackTrace();
         }
     }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        inicializarMenu();
+    }
+    private void inicializarMenu() {
+        System.out.println("Usuario: " + cliente.getNombre());
+        System.out.println("Puntos: " + cliente.getPuntos());
+}
 }

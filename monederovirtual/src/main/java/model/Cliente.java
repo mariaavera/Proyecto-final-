@@ -6,18 +6,57 @@ import java.util.List;
 
 public class Cliente {
         private String nombre;
+        private String cedula;
         private Cuenta cuenta;
+        private String contrasena;
         private int puntos;
-        private TransaccionProgramada transaccionProgramada;
+        private TransaccionProgramada transaccionProgramada=null;
         private List<MonederoVirtual> monederos;
         private double descuentoTransferencias = 0;
-        private LocalDate retirosGratisHasta;
+        private LocalDate retirosGratisHasta=null;
 
-    public Cliente(String nombre, Cuenta cuenta, int puntos) {
+    public Cliente(String nombre, String cedula, String contrasena, Cuenta cuenta, int puntos) {
         this.nombre = nombre;
+        this.cedula=cedula;
         this.cuenta = cuenta;
         this.puntos = puntos;
         this.monederos=new ArrayList<>();
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public TransaccionProgramada getTransaccionProgramada() {
+        return transaccionProgramada;
+    }
+
+    public void setTransaccionProgramada(TransaccionProgramada transaccionProgramada) {
+        this.transaccionProgramada = transaccionProgramada;
+    }
+
+    public List<MonederoVirtual> getMonederos() {
+        return monederos;
+    }
+
+    public void setMonederos(List<MonederoVirtual> monederos) {
+        this.monederos = monederos;
+    }
+
+    public LocalDate getRetirosGratisHasta() {
+        return retirosGratisHasta;
     }
     public void agregarPuntos(int puntosGanados) {
         this.puntos += puntosGanados;

@@ -6,9 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Cliente;
-import model.Cuenta;
-import model.MonederoVirtual;
+import model.*;
 
 public class RegistroController {
     @FXML
@@ -46,17 +44,21 @@ public class RegistroController {
             lblMensaje.setText("Las contraseñas no coinciden.");
             return;
         }
-
-        Cliente cliente = new Cliente(nombre, cedula, pass);
-
         Cuenta cuenta = new Cuenta(0, generarNumeroCuenta());
+        Cliente cliente = new Cliente(nombre, cedula, pass, cuenta, 0);
         cliente.setCuenta(cuenta);
-
-        cliente.agregarMonedero(new MonederoVirtual("Principal"));
-        cliente.agregarMonedero(new MonederoVirtual("Ahorros"));
-        cliente.agregarMonedero(new MonederoVirtual("Gastos"));
-
-        BaseDatosClientes.agregarCliente(cliente);
+        MonederoIndividual principal = new MonederoIndividual("Principal", 0);
+        MonederoIndividual ahorros   = new MonederoIndividual("Ahorros", 0);
+        MonederoIndividual gastos    = new MonederoIndividual("Gastos", 0);
+        Multimonedero multimonedero = new Multimonedero("Multimonedero", 0);
+        multimonedero.agregarMonedero(principal);
+        multimonedero.agregarMonedero(ahorros);
+        multimonedero.agregarMonedero(gastos);
+        cliente.registrarMonedero(principal);
+        cliente.registrarMonedero(ahorros);
+        cliente.registrarMonedero(gastos);
+        cliente.registrarMonedero(multimonedero);
+        BaseInformaciónCliente.agregarCliente(cliente);
 
         lblMensaje.setText("Registro exitoso. Ahora inicia sesión.");
 
