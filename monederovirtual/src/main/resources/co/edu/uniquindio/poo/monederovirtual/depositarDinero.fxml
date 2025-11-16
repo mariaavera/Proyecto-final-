@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="6.0" prefHeight="109.0" prefWidth="390.0" text="Deposito de dinero" textAlignment="CENTER" textFill="#1809f2">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDepositoDinero" layoutX="52.0" layoutY="140.0" prefHeight="44.0" prefWidth="286.0" promptText="Valor a depositar" />
+      <Button fx:id="btnDepositarDinero" layoutX="129.0" layoutY="235.0" mnemonicParsing="false" onAction="#DepositarDineroaction" prefHeight="59.0" prefWidth="132.0" text="Depositar">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
