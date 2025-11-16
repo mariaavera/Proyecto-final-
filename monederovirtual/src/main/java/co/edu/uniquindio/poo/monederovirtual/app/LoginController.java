@@ -15,12 +15,12 @@ public class LoginController {
     private Button btnLogin;
 
     @FXML
-    private void abrirRegistro() {
+    private void Registrarseaction() {
         abrirVentana("Registro.fxml", "Crear cuenta");
     }
 
     @FXML
-    private void abrirLogin() {
+    private void IniciarSesionaction() {
         abrirVentana("Login.fxml", "Iniciar Sesión");
     }
 

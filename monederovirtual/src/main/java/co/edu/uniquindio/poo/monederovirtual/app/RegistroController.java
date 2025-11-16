@@ -28,7 +28,7 @@ public class RegistroController {
     private Label lblMensaje;
 
     @FXML
-    private void registrarCliente() {
+    private void Registraraction() {
 
         String nombre = txtNombre.getText();
         String cedula = txtCedula.getText();

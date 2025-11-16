@@ -7,8 +7,10 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.poo.monederovirtual.app.DepositarDineroController">
+
+    <children>
       <Label layoutX="6.0" prefHeight="109.0" prefWidth="390.0" text="Deposito de dinero" textAlignment="CENTER" textFill="#1809f2">
          <font>
             <Font name="System Bold" size="40.0" />

@@ -24,7 +24,7 @@ public class TransferenciaController {
     }
 
     @FXML
-    public void transferir(){
+    public void TransferirDineroaction(){
         try{
             double monto = Double.parseDouble(txtMonto.getText());
 

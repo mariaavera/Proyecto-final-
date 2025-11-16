@@ -16,13 +16,11 @@ public class DepositarDineroController {
 
     private Cuenta cuentaActiva;
 
-    // Método para recibir la cuenta desde la vista anterior
     public void inicializarDatos(Cuenta cuenta) {
         this.cuentaActiva = cuenta;
     }
-
     @FXML
-    public void depositar() {
+    public void DepositarDineroaction() {
         try {
             double valor = Double.parseDouble(txtMonto.getText());
 

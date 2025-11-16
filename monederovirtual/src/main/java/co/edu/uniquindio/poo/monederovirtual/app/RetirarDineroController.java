@@ -2,7 +2,8 @@ package co.edu.uniquindio.poo.monederovirtual.app;
 
 import javafx.fxml.FXML;
 import model.Cuenta;
-import java.awt.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class RetirarDineroController {
     @FXML
@@ -18,7 +19,7 @@ public class RetirarDineroController {
     }
 
     @FXML
-    public void retirar(){
+    public void RetirarDineroaction(){
         try{
             double monto = Double.parseDouble(txtMonto.getText());
 

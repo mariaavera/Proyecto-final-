@@ -26,7 +26,7 @@ public class IniciarSesionController {
     private Button btnIngresar;
 
     @FXML
-    private void iniciarSesion() {
+    private void IniciarSesionaction() {
         String cedula = txtCedula.getText();
         String pass = txtContrasena.getText();
         if (cedula.isEmpty() || pass.isEmpty()) {

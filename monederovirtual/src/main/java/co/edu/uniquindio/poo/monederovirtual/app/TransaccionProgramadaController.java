@@ -39,7 +39,7 @@ public class TransaccionProgramadaController {
     }
 
     @FXML
-    public void programarTransaccion() {
+    public void Programaraction() {
 
         try {
             String tipo = cbTipoTransaccion.getValue();
@@ -96,7 +96,7 @@ public class TransaccionProgramadaController {
     }
 
     @FXML
-    public void cerrarVentana() {
+    public void Cerraraction() {
         lblMensaje.getScene().getWindow().hide();
     }
 }

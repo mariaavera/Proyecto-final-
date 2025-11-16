@@ -18,7 +18,7 @@ public class SistemaPuntosController {
     private Label lblMensaje;
 
     @FXML
-    private TextField txtCanje;
+    private TextField txtPuntosACanjear;
 
     public void inicializarDatos(Cliente cliente) {
         this.clienteActivo = cliente;
@@ -40,7 +40,7 @@ public class SistemaPuntosController {
     @FXML
     public void canjearPuntos() {
         try {
-            int cantidad = Integer.parseInt(txtCanje.getText());
+            int cantidad = Integer.parseInt(txtPuntosACanjear.getText());
 
             if (cantidad <= 0) {
                 lblMensaje.setText("Ingresa una cantidad válida.");

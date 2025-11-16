@@ -38,7 +38,7 @@ public class MenuPrincipalController {
     private Button btnTransferirDinero;
 
     @FXML
-    void ConsultaHistorialAction(ActionEvent event) {
+    void ConsultaHistorialaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaHistorial.fxml"));
             Scene scene = new Scene(loader.load());
@@ -51,7 +51,7 @@ public class MenuPrincipalController {
     }
 
     @FXML
-    void ConsultaSaldoAction(ActionEvent event) {
+    void ConsultaSaldoaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ConsultaSaldo.fxml"));
             Scene scene = new Scene(loader.load());
@@ -64,7 +64,7 @@ public class MenuPrincipalController {
     }
 
     @FXML
-    void DepositarDineroAction(ActionEvent event) {
+    void DepositarDineroaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DepositarDinero.fxml"));
             Scene scene = new Scene(loader.load());
@@ -77,7 +77,7 @@ public class MenuPrincipalController {
     }
 
     @FXML
-    void RetirarDineroAction(ActionEvent event) {
+    void RetirarDineroaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RetirarDinero.fxml"));
             Scene scene = new Scene(loader.load());
@@ -90,13 +90,13 @@ public class MenuPrincipalController {
     }
 
     @FXML
-    void SalirAction(ActionEvent event) {
+    void Saliraction(ActionEvent event) {
         Stage stage = (Stage) btnSalir.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    void SistemaPuntosAction(ActionEvent event) {
+    void SistemaPuntosaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SistemaPuntos.fxml"));
             Scene scene = new Scene(loader.load());
@@ -109,7 +109,7 @@ public class MenuPrincipalController {
     }
 
     @FXML
-    void TransferirDineroAction(ActionEvent event) {
+    void TransferirDineroaction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TransferirDinero.fxml"));
             Scene scene = new Scene(loader.load());
@@ -121,7 +121,7 @@ public class MenuPrincipalController {
         }
     }
     @FXML
-    private void abrirAnalizador() {
+    private void AnalizadorGastosaction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AnalizadorGastos.fxml"));
             Scene scene = new Scene(loader.load());
@@ -139,7 +139,7 @@ public class MenuPrincipalController {
         }
     }
     @FXML
-    public void abrirTransaccionesProgramadas() {
+    public void ProgramarTransaccionaction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("transaccionesProgramadas.fxml"));
             Parent root = loader.load();
