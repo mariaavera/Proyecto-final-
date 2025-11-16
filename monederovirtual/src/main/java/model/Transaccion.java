@@ -22,7 +22,7 @@ public abstract class Transaccion {
     public String toString() {
         return id + " | " + valor + " | " + fecha;
     }
-    public abstract void ejecutar(MonederoVirtual monedero);
+    public abstract void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino);
     public abstract String getDescripcion();
 
     public String getId() {

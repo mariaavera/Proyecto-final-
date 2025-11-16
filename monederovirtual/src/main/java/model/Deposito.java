@@ -19,7 +19,7 @@ public class Deposito extends Transaccion{
     }
 
     @Override
-    public void ejecutar(MonederoVirtual monedero) {
+    public void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
         cuentaDestino.depositarDinero(valor);
     }
     @Override

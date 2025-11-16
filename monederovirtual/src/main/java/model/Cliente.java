@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ public class Cliente {
         private int puntos;
         private TransaccionProgramada transaccionProgramada;
         private List<MonederoVirtual> monederos;
+        private double descuentoTransferencias = 0;
+        private LocalDate retirosGratisHasta;
 
     public Cliente(String nombre, Cuenta cuenta, int puntos) {
         this.nombre = nombre;
@@ -57,4 +60,40 @@ public class Cliente {
         monederos.add(monedero);
         System.out.println("Monedero registrado correctamente: " + monedero.getNombre());
     }
+    public MonederoVirtual getMonederoPrincipal() {
+        return monederos.get(0);
+    }
+    public double getDescuentoTransferencias() {
+        return descuentoTransferencias;
+    }
+
+    public void setDescuentoTransferencias(double descuento) {
+        this.descuentoTransferencias = descuento;
+    }
+
+    public void setRetirosGratisHasta(LocalDate fecha) {
+        this.retirosGratisHasta = fecha;
+    }
+    public boolean tieneRetirosGratis() {
+        return retirosGratisHasta != null && LocalDate.now().isBefore(retirosGratisHasta);
+    }
+    public void descontarPuntos(int p) {
+        puntos -= p;
+    }
+    public boolean canjear(Beneficio beneficio) {
+        if (puntos < beneficio.getPuntosRequeridos()) {
+            System.out.println("No tienes suficientes puntos.");
+            return false;
+        }
+
+        descontarPuntos(beneficio.getPuntosRequeridos());
+
+        if (beneficio instanceof Puntos puntos) {
+            puntos.aplicarBeneficio(this);
+        }
+
+        System.out.println("Canje exitoso: " + beneficio.getNombre());
+        return true;
+    }
+
 }

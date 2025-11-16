@@ -1,10 +1,9 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Transferencia extends Transaccion{
     private Cuenta cuentaOrigen;
     private Cuenta cuentaDestino;
+    private double comisionBase = 0.02;
 
     public Transferencia(double monto, Cliente cliente,
                          Cuenta cuentaOrigen, Cuenta cuentaDestino) {
@@ -16,9 +15,20 @@ public class Transferencia extends Transaccion{
 
 
     @Override
-    public void ejecutar(MonederoVirtual monedero) {
-        cuentaOrigen.transferirDinero(cuentaDestino, valor);
+    public void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
+
+        double comision = valor * comisionBase;
+        double total = valor + comision;
+
+        if (cuentaOrigen.getSaldo() < total) {
+            System.out.println("Saldo insuficiente para la transferencia");
+            return;
+        }
+        cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - total);
+        cuentaDestino.setSaldo(cuentaDestino.getSaldo() + valor);
+        System.out.println("Transferencia realizada con éxito.");
     }
+
     @Override
     public String getDescripcion() {
         return "Transferencia de: " + valor + " el " + fecha+",enviado a la cuenta: "+cuentaDestino;
