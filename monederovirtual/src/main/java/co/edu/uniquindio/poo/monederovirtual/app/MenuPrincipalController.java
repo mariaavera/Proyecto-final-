@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import model.Cuenta;
 import model.MonederoVirtual;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuPrincipalController {
     private Cliente cliente;
@@ -97,8 +100,11 @@ public class MenuPrincipalController {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/RetirarDinero.fxml")
             );
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) btnRetirarDinero.getScene().getWindow();
+            Parent root = loader.load();
+            RetirarDineroController controller = loader.getController();
+            controller.setCliente(clienteActual);
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -133,10 +139,14 @@ public class MenuPrincipalController {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/Transferencia.fxml")
             );
-            Scene scene = new Scene(loader.load());
+            Parent root = loader.load();
+            TransferenciaController controller = loader.getController();
+            controller.inicializarConCliente(clienteActual);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) btnTransferirDinero.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,17 +157,20 @@ public class MenuPrincipalController {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/AnalizadorGasto.fxml")
             );
-            Scene scene = new Scene(loader.load());
+            Parent root = loader.load();
             AnalizadorGastosController controller = loader.getController();
-
-            AnalizadorGastos analizador = new AnalizadorGastos(cliente.getCuenta());
+            List<Cuenta> cuentasCliente = cliente.getCuentas();
+            if (cuentasCliente == null) {
+                cuentasCliente = new ArrayList<>();
+            }
+            AnalizadorGastos analizador = new AnalizadorGastos(cliente);
             controller.setAnalizadorGastos(analizador);
-
             Stage stage = new Stage();
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.setTitle("Analizador de Gastos");
             stage.show();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -72,7 +72,11 @@ public class AnalizadorGastosController {
             int mesSeleccionado = comboPeriodo.getSelectionModel().getSelectedIndex() + 1;
             String categoriaSeleccionada = comboCategoria.getValue();
 
-            List<Transaccion> transacciones = analizador.getCuenta().consultaTransacciones();
+            List<Transaccion> transacciones = analizador.getCliente()
+                    .getCuentas()
+                    .stream()
+                    .flatMap(c -> c.consultaTransacciones().stream())
+                    .toList();
             List<Transaccion> filtradas = transacciones.stream()
                     .filter(t -> t.getFecha().getMonthValue() == mesSeleccionado)
                     .filter(t -> categoriaSeleccionada == null || t.getClass().getSimpleName().equals(categoriaSeleccionada))

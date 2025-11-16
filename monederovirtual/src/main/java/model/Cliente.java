@@ -7,7 +7,7 @@ import java.util.List;
 public class Cliente {
         private String nombre;
         private String cedula;
-        private Cuenta cuenta;
+    private List<Cuenta> cuentas = new ArrayList<>();
         private String contrasena;
         private int puntos;
         private TransaccionProgramada transaccionProgramada=null;
@@ -15,13 +15,16 @@ public class Cliente {
         private double descuentoTransferencias = 0;
         private LocalDate retirosGratisHasta=null;
 
-    public Cliente(String nombre, String cedula, String contrasena, Cuenta cuenta, int puntos) {
+    public Cliente(String nombre, String cedula, String contrasena,int puntos) {
         this.nombre = nombre;
         this.cedula=cedula;
         this.contrasena=contrasena;
-        this.cuenta = cuenta;
         this.puntos = puntos;
         this.monederos=new ArrayList<>();
+        cuentas = new ArrayList<>();
+        cuentas.add(new Cuenta( 0.0,
+                GenerarCuentas.generarNumero(),
+                this));
     }
 
     public String getCedula() {
@@ -78,13 +81,14 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
+    public List<Cuenta> getCuentas() {
+        return cuentas;
     }
 
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
+    public void setCuentas(List<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
+
     public void rangoCliente(){
         if(puntos>=0 && puntos<=500){
             System.out.println("El rango del cliente es:Bronce");

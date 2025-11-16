@@ -8,21 +8,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.RetirarDineroController">
    <children>
-      <Label layoutX="14.0" prefHeight="117.0" prefWidth="404.0" text="Retiro de dinero" textAlignment="CENTER" textFill="#0900ff">
+      <Label layoutX="14.0" layoutY="29.0" prefHeight="117.0" prefWidth="404.0" text="Retiro de dinero" textAlignment="CENTER" textFill="#0900ff">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="txtRetirarDinero" layoutX="82.0" layoutY="98.0" prefHeight="38.0" prefWidth="240.0" promptText="Valor a retirar ">
+      <TextField fx:id="txtRetirarDinero" layoutX="82.0" layoutY="127.0" prefHeight="38.0" prefWidth="240.0" promptText="Valor a retirar ">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="btnRetirarDinero" layoutX="136.0" layoutY="154.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="46.0" prefWidth="133.0" text="Retirar">
+      <Button fx:id="btnRetirarDinero" layoutX="136.0" layoutY="183.0" mnemonicParsing="false" onAction="#RetirarDineroaction" prefHeight="46.0" prefWidth="133.0" text="Retirar">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
-      <Label fx:id="lblMensaje" layoutX="37.0" layoutY="222.0" prefHeight="46.0" prefWidth="330.0" />
+      <Label fx:id="lblMensaje" layoutX="37.0" layoutY="251.0" prefHeight="46.0" prefWidth="330.0" />
+      <Button fx:id="btnVolver" layoutX="20.0" layoutY="17.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
    </children>
 </AnchorPane>

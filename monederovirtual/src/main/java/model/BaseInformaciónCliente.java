@@ -34,5 +34,13 @@ public class BaseInformaciónCliente {
         }
         return null;
     }
+    public static Cuenta buscarCuentaPorNumero(String numeroCuenta) {
+        for (Cliente c : clientes) {
+            for (Cuenta cuenta : c.getCuentas()) {
+                if (cuenta.getId().equals(numeroCuenta)) return cuenta;
+            }
+        }
+        return null;
+    }
 }
 

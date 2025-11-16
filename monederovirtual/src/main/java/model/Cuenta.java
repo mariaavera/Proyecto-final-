@@ -1,6 +1,4 @@
 package model;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cuenta {
@@ -9,12 +7,30 @@ public class Cuenta {
     private Cliente cliente;
     private ArrayList<Transaccion> listaTransacciones;
 
-    public Cuenta(double saldo, String numero) {
+    public Cuenta(double saldo, String numero,Cliente cliente) {
         if (saldo < 0) {
             throw new IllegalArgumentException("El saldo no puede ser negativo");
         }
         this.saldo = saldo;
         this.id = numero;
+        this.cliente = cliente;
+        this.listaTransacciones = new ArrayList<>();
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public ArrayList<Transaccion> getListaTransacciones() {
+        return listaTransacciones;
+    }
+
+    public void setListaTransacciones(ArrayList<Transaccion> listaTransacciones) {
+        this.listaTransacciones = listaTransacciones;
     }
 
     public double getSaldo() {
@@ -32,68 +48,47 @@ public class Cuenta {
     public void setId(String id) {
         this.id = id;
     }
-    public boolean depositarDinero(double valorADepositar){
-        if(valorADepositar<0){
-            System.out.println("El valor a depositar tiene que ser positivo");
-            return false;
+    public String depositarDinero(double valorADepositar){
+        if(valorADepositar < 0){
+            return "El valor a depositar debe ser positivo.";
         }
-        saldo+=valorADepositar;
-        int puntosGanados = (int)(valorADepositar / 100) * 1;
+        saldo += valorADepositar;
+        int puntosGanados = (int)(valorADepositar / 100);
         cliente.agregarPuntos(puntosGanados);
-        System.out.println("Deposito exitoso,su dinero se ingreso a la cuenta correctamente");
-        System.out.println("Tus puntos ganados fueron: "+puntosGanados);
-        String concepto = "Depósito a monedero principal";
-        listaTransacciones.add(new Deposito(valorADepositar, cliente, concepto,this));
-        return true;
+        if (listaTransacciones == null) {
+            listaTransacciones = new ArrayList<>();
+        }
+        listaTransacciones.add(
+                new Deposito(valorADepositar, cliente, "Depósito a monedero principal", this)
+        );
+        return "Depósito exitoso.\nPuntos ganados: " + puntosGanados;
     }
-    public boolean retirarDinero(double valorARetirar){
+    public String retirarDinero(double valorARetirar){
         if(valorARetirar<0){
-            System.out.println("No puede retirar un valor negativo");
-            return false;
+            return "El valor a retirar debe ser positivo.";
         }else if(saldo<valorARetirar){
-            System.out.println("No tiene saldo suficiente");
-            return false;
+            return"No tiene saldo suficiente";
         }else{
             saldo-=valorARetirar;
             int puntosGanados = (int)(valorARetirar / 100) * 2;
             cliente.agregarPuntos(puntosGanados);
-            System.out.println("Retiro exitoso");
-            System.out.println("Puntos ganados: "+puntosGanados);
             String concepto = "Retiro del monedero principal";
             listaTransacciones.add(new Retiro(valorARetirar, cliente, concepto,this));
-            return true;
+            return "Retiro exitoso.\nPuntos ganados: " + puntosGanados;
         }
     }
-    public boolean transferirDinero(Cuenta destino, double valor) {
-        if (destino == null) {
-            System.out.println("La cuenta destino no existe.");
-            return false;
-        }
-        if (destino == this) {
-            System.out.println("No puede transferirse a la misma cuenta.");
-            return false;
-        }
-        if (valor <= 0) {
-            System.out.println("El valor a transferir debe ser positivo.");
-            return false;
-        }
-        if (this.saldo < valor) {
-            System.out.println("Saldo insuficiente.");
-            return false;
-        }
+    public String transferirDinero(Cuenta destino, double valor) {
+        if (destino == null) return "La cuenta destino no existe.";
+        if (destino == this) return "No puede transferirse a la misma cuenta.";
+        if (valor <= 0) return "El valor a transferir debe ser mayor a 0.";
+        if (this.saldo < valor) return "Saldo insuficiente.";
         this.saldo -= valor;
         destino.saldo += valor;
         int puntosGanados = (int)(valor / 100) * 3;
-        cliente.agregarPuntos(puntosGanados);
-        if (this.cliente != null) {
-            this.cliente.setPuntos(this.cliente.getPuntos() + puntosGanados);
-        }
-        System.out.println("Transferencia realizada. Puntos ganados: " + puntosGanados);
-        String concepto = "Transferencia del monedero principal a otra cuenta";
-        listaTransacciones.add(new Transferencia(valor, cliente, concepto,this,destino));
-        return true;
+        if (cliente != null) cliente.agregarPuntos(puntosGanados);
+        return String.format("Transferencia exitosa. Monto: %.2f. Puntos ganados: %d. Puntos totales: %d",
+                valor, puntosGanados, cliente != null ? cliente.getPuntos() : 0);
     }
-
     public double consultaSaldo(){
         return saldo;
     }

@@ -46,8 +46,9 @@ public class RegistroController {
             lblMensaje.setText("Las contraseñas no coinciden.");
             return;
         }
-        Cuenta cuenta = new Cuenta(0, generarNumeroCuenta());
+        Cuenta cuenta = new Cuenta(0, generarNumeroCuenta(),null);
         Cliente cliente = new Cliente(nombre, cedula, pass, cuenta, 0);
+        cuenta.setCliente(cliente);
         cliente.setCuenta(cuenta);
         MonederoIndividual principal = new MonederoIndividual("Principal", 0);
         MonederoIndividual ahorros   = new MonederoIndividual("Ahorros", 0);
