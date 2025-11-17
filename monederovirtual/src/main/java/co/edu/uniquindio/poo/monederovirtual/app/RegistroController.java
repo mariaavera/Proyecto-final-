@@ -71,7 +71,7 @@ public class RegistroController {
         cliente.registrarMonedero(ahorros);
         cliente.registrarMonedero(gastos);
         cliente.registrarMonedero(multimonedero);
-        BaseInformaciónCliente.agregarCliente(cliente);
+        BaseInformacionCliente.agregarCliente(cliente);
 
         lblMensaje.setText("Registro exitoso. Ahora inicia sesión.");
 

@@ -17,7 +17,31 @@ public abstract class MonederoVirtual {
         return cuentaPrincipal;
     }
 
-    public MonederoVirtual(String nombre,double valor) {
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Transaccion> getTransProgramadas() {
+        return transProgramadas;
+    }
+
+    public void setTransProgramadas(List<Transaccion> transProgramadas) {
+        this.transProgramadas = transProgramadas;
+    }
+
+    public Map<String, LocalDate> getFechasProgramadas() {
+        return fechasProgramadas;
+    }
+
+    public void setFechasProgramadas(Map<String, LocalDate> fechasProgramadas) {
+        this.fechasProgramadas = fechasProgramadas;
+    }
+
+    public void setCuentaPrincipal(Cuenta cuentaPrincipal) {
+        this.cuentaPrincipal = cuentaPrincipal;
+    }
+
+    public MonederoVirtual(String nombre, double valor) {
         this.nombre = nombre;
         this.saldo=valor;
         this.listaClientes = new ArrayList<>();

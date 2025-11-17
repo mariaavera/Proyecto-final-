@@ -17,6 +17,7 @@ public class Cuenta {
         this.listaTransacciones = new ArrayList<>();
     }
 
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -30,7 +31,9 @@ public class Cuenta {
     }
 
     public void setListaTransacciones(ArrayList<Transaccion> listaTransacciones) {
-        this.listaTransacciones = listaTransacciones;
+        this.listaTransacciones = (listaTransacciones != null)
+                ? listaTransacciones
+                : new ArrayList<>();
     }
 
     public double getSaldo() {
@@ -93,15 +96,17 @@ public class Cuenta {
         return saldo;
     }
     public ArrayList<Transaccion> consultaTransacciones(){
-        ArrayList<Transaccion> historial=new ArrayList<>();
+        ArrayList<Transaccion> historial = new ArrayList<>();
+
+        if (listaTransacciones == null) {
+            listaTransacciones = new ArrayList<>();
+        }
         if (listaTransacciones.isEmpty()) {
             System.out.println("No tienes transacciones registradas.");
-            return null;
+            return historial;
         }
-        System.out.println("Historial de transacciones:");
-        for (Transaccion t : listaTransacciones) {
-            historial.add(t);
-        }
+
+        historial.addAll(listaTransacciones);
         return historial;
     }
 }

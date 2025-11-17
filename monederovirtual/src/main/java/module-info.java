@@ -3,6 +3,7 @@ module co.edu.uniquindio.poo.monederovirtual {
     requires javafx.fxml;
     requires java.desktop;
     requires javafx.graphics;
+    requires javafx.base;
 
     opens co.edu.uniquindio.poo.monederovirtual.app to javafx.fxml;
     exports co.edu.uniquindio.poo.monederovirtual.app;

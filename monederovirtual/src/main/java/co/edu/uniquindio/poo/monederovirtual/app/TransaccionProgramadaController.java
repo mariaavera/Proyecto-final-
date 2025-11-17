@@ -1,99 +1,125 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import model.*;
 
 import java.time.LocalDate;
 
+import static model.BaseInformacionCliente.getMonederoActual;
+
 public class TransaccionProgramadaController {
-    private MonederoVirtual monederoActivo;
-    private Cliente clienteActivo;
+    @FXML private ChoiceBox<String> cbTipoTransaccion;
+    @FXML private ComboBox<Cuenta> cbCuentaOrigen;
+    @FXML private TextField txtMonto;
+    @FXML private TextField txtConcepto;
+    @FXML private TextField txtCantidadDias;
+    @FXML private ComboBox<Cuenta> cbCuentaDestino;
+    @FXML private DatePicker dpFechaInicio;
+    @FXML private Button btnProgramar;
+    @FXML private Button btnCerrar;
 
-    @FXML
-    private ChoiceBox<String> cbTipoTransaccion;
-
-    @FXML
-    private ComboBox<Cuenta> cbCuentaOrigen;
-
-    @FXML
-    private TextField txtMonto;
-
-    @FXML
-    private TextField txtConcepto;
-
-    @FXML
-    private TextField txtCuentaDestino;
-
-    @FXML
-    private DatePicker dpFecha;
-
-    @FXML
-    private Label lblMensaje;
     private Cliente cliente;
+    public void inicializarConCliente(Cliente cliente) {
+        this.cliente = cliente;
 
-    public void setCliente(MonederoVirtual monedero, Cliente cliente) {
-        this.monederoActivo = monedero;
-        this.clienteActivo = cliente;
-        inicializarDatos(); // ahora sí se puede llamar SIN parámetros
-    }
+        cbCuentaOrigen.getItems().clear();
 
-    public void inicializarDatos() {
-        cbTipoTransaccion.getItems().addAll("Depósito", "Transferencia");
         cbCuentaOrigen.getItems().addAll(cliente.getCuentas());
-    }
 
-    @FXML
+        if (!cbCuentaOrigen.getItems().isEmpty()) {
+            cbCuentaOrigen.getSelectionModel().selectFirst();
+        }
+        cbTipoTransaccion.getItems().clear();
+        cbTipoTransaccion.getItems().addAll("Depósito", "Transferencia");
+    }
     public void Programaraction() {
+
         try {
+
             String tipo = cbTipoTransaccion.getValue();
-            if (tipo == null) {
-                lblMensaje.setText("Selecciona un tipo de transacción.");
-                return;
-            }
+            double valor = Double.parseDouble(txtMonto.getText());
+            String concepto = txtConcepto.getText();
+            LocalDate fecha = dpFechaInicio.getValue();
 
             Cuenta cuentaOrigen = cbCuentaOrigen.getValue();
-            if (cuentaOrigen == null) {
-                lblMensaje.setText("Selecciona una cuenta de origen.");
+            Cuenta cuentaDestino = cbCuentaDestino.getValue();
+
+
+            MonederoVirtual monedero = BaseInformacionCliente.getMonederoActual();
+
+            if (monedero == null) {
+                mostrarMensaje("No se encontró un monedero activo.");
                 return;
             }
 
-            double monto = Double.parseDouble(txtMonto.getText());
-            String concepto = txtConcepto.getText();
-            LocalDate fecha = dpFecha.getValue();
+            Cliente cliente = monedero.getListaClientes().get(0);
 
-            if (concepto.isEmpty() || fecha == null) {
-                lblMensaje.setText("Completa todos los campos.");
-                return;
-            }
+            Transaccion trans = null;
 
-            Transaccion transaccion;
+            switch (tipo) {
 
-            if (tipo.equals("Depósito")) {
-                transaccion = new Deposito(monto, clienteActivo, concepto, cuentaOrigen);
+                case "Depósito":
+                    if (cuentaDestino == null) {
+                        mostrarMensaje("Seleccione una cuenta destino.");
+                        return;
+                    }
+                    trans = new Deposito(valor, cliente, concepto, cuentaDestino);
+                    break;
 
-            } else {
-                String idDestino = txtCuentaDestino.getText();
+                case "Transferencia":
+                    if (cuentaOrigen == null || cuentaDestino == null) {
+                        mostrarMensaje("Seleccione cuentas origen y destino.");
+                        return;
+                    }
+                    trans = new Transferencia(valor, cliente, concepto, cuentaOrigen, cuentaDestino);
+                    break;
 
-                Cuenta cuentaDestino = BaseInformaciónCliente.buscarCuentaPorNumero(idDestino);
-                if (cuentaDestino == null) {
-                    lblMensaje.setText("La cuenta destino no existe.");
+                default:
+                    mostrarMensaje("Solo se pueden programar depósitos y transferencias.");
                     return;
-                }
-
-                transaccion = new Transferencia(monto, clienteActivo, concepto, cuentaOrigen, cuentaDestino);
             }
+            monedero.programarTransaccion(trans, fecha);
 
-            monederoActivo.programarTransaccion(transaccion, fecha);
-            lblMensaje.setText("Transacción programada correctamente.");
+            mostrarMensaje("Transacción programada correctamente.");
 
-        } catch (NumberFormatException e) {
-            lblMensaje.setText("El monto no es válido.");
+        } catch (Exception e) {
+            mostrarMensaje("Error: " + e.getMessage());
         }
     }
 
+    private void mostrarMensaje(String msg){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Mensaje");
+        alert.setContentText(msg);
+        alert.show();
+    }
     @FXML
-    public void Cerraraction() {
-        lblMensaje.getScene().getWindow().hide();
+    public void Cerraraction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
+            );
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Menú Principal");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR retornando al menú: " + e.getMessage());
+        }
     }
 }

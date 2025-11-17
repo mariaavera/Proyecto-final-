@@ -3,10 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseInformaciónCliente {
+public class BaseInformacionCliente {
     private static List<Cliente> clientes = new ArrayList<>();
+    private static MonederoVirtual monederoActual;
 
-    public BaseInformaciónCliente() {
+    public BaseInformacionCliente() {
     }
 
     public static void agregarCliente(Cliente cliente) {
@@ -18,7 +19,7 @@ public class BaseInformaciónCliente {
     }
 
     public static void setClientes(List<Cliente> clientes) {
-        BaseInformaciónCliente.clientes = clientes;
+        BaseInformacionCliente.clientes = clientes;
     }
 
     public static Cliente buscarPorCedula(String cedula) {
@@ -42,5 +43,12 @@ public class BaseInformaciónCliente {
         }
         return null;
     }
+    public static void setMonederoActual(MonederoVirtual monedero) {
+        monederoActual = monedero;
+    }
+    public static MonederoVirtual getMonederoActual() {
+        return monederoActual;
+    }
+
 }
 

@@ -22,7 +22,7 @@ public class MenuPrincipalController {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
         if (cliente.getCuentas() != null && !cliente.getCuentas().isEmpty()) {
-            this.cuentaActiva = cliente.getCuentas().get(0);
+            this.cuentaActiva = cliente.getCuentas().getFirst();
         }
     }
 
@@ -64,8 +64,10 @@ public class MenuPrincipalController {
 
     @FXML
     void ProgramarTransaccionaction(ActionEvent event) {
-        cargarVentana("ProgramarTransaccion.fxml",
-                controller -> ((TransaccionProgramadaController) controller).setCliente(monedero, cliente));
+        cargarVentana("ProgramarTransaccion.fxml", controller -> {
+            TransaccionProgramadaController c = (TransaccionProgramadaController) controller;
+            c.inicializarConCliente(cliente);   // solo se envía el cliente
+        });
     }
 
     @FXML
@@ -77,8 +79,9 @@ public class MenuPrincipalController {
     @FXML
     void ConsultaHistorialaction(ActionEvent event) {
         cargarVentana("ConsultarHistorial.fxml",
-                controller -> ((ConsultarHistorialController) controller).inicializarDatos(cliente));
+                controller -> ((ConsultarHistorialController) controller).setCliente(cliente));
     }
+
 
     @FXML
     void Saliraction(ActionEvent event) {

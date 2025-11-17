@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.ConsultarHistorialController">
    <children>
       <Label layoutX="14.0" prefHeight="73.0" prefWidth="449.0" text="Consulta Historial" textFill="#0005ff">
          <font>
@@ -24,7 +23,7 @@
             <TableColumn fx:id="colPuntos" prefWidth="101.0" text="Puntos" />
         </columns>
       </TableView>
-      <Button layoutX="179.0" layoutY="350.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="92.0" text="Cerrar">
+      <Button fx:id="btnCerrar" layoutX="179.0" layoutY="350.0" mnemonicParsing="false" onAction="#Cerraraction" prefHeight="36.0" prefWidth="92.0" text="Cerrar">
          <font>
             <Font size="16.0" />
          </font>

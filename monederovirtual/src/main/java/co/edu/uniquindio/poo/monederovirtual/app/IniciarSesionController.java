@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.BaseInformaciónCliente;
+import model.BaseInformacionCliente;
 import model.Cliente;
 
 public class IniciarSesionController {
@@ -33,7 +33,7 @@ public class IniciarSesionController {
             lblMensaje.setText("Completa todos los campos.");
             return;
         }
-        Cliente cliente = BaseInformaciónCliente.validarLogin(cedula, pass);
+        Cliente cliente = BaseInformacionCliente.validarLogin(cedula, pass);
 
         if (cliente == null) {
             lblMensaje.setText("Cédula o contraseña incorrecta.");

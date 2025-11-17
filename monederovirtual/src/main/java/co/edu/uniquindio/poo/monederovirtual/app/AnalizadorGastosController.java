@@ -1,9 +1,15 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import model.AnalizadorGastos;
 import model.Cliente;
 import model.Transaccion;
@@ -91,4 +97,24 @@ public class AnalizadorGastosController {
             lblTotal.setText("Total: " + total);
             lblPromedio.setText("Promedio mensual: " + analizador.calcularPromedioGastoMensual(LocalDate.now().getYear()));
         }
+    @FXML
+    public void Volveraction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
+            );
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Menú Principal");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR retornando al menú: " + e.getMessage());
+        }
+    }
     }

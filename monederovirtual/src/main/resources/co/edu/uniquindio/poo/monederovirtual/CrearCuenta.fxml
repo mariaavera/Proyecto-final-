@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.CrearCuentaController">
    <children>
-      <Label layoutX="86.0" layoutY="14.0" prefHeight="40.0" prefWidth="227.0" text="Nueva Cuenta" textFill="#2f00ff">
+      <Label layoutX="105.0" layoutY="14.0" prefHeight="40.0" prefWidth="227.0" text="Nueva Cuenta" textFill="#2f00ff">
          <font>
             <Font size="35.0" />
          </font>
@@ -21,5 +20,6 @@
       </Label>
       <TextField fx:id="txtSaldoInicial" layoutX="143.0" layoutY="74.0" prefHeight="25.0" prefWidth="189.0" />
       <Button fx:id="btnCrearCuenta" layoutX="143.0" layoutY="125.0" mnemonicParsing="false" onAction="#CrearCuentaaction" prefHeight="32.0" prefWidth="100.0" text="Crear Cuenta" />
+      <Button fx:id="btnVolver" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
    </children>
 </AnchorPane>

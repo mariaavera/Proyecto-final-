@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.AnalizadorGastosController">
    <children>
-      <Label layoutX="84.0" prefHeight="88.0" prefWidth="680.0" text="Visualización Gastos" textFill="#4800ff">
+      <Label layoutX="122.0" prefHeight="88.0" prefWidth="499.0" text="Visualización Gastos" textFill="#4800ff">
          <font>
             <Font size="56.0" />
          </font>
@@ -49,5 +48,6 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <Button fx:id="btnVolver" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
    </children>
 </AnchorPane>
