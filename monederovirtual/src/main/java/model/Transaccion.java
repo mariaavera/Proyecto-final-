@@ -26,10 +26,6 @@ public abstract class Transaccion {
         return concepto;
     }
 
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -46,7 +42,6 @@ public abstract class Transaccion {
         return id + " | " + valor + " | " + fecha;
     }
     public abstract void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino);
-    public abstract String getDescripcion();
 
     public String getId() {
         return id;
@@ -54,10 +49,6 @@ public abstract class Transaccion {
 
     public LocalDate getFecha() {
         return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
     }
 
     public double getValor() {

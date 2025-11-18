@@ -26,15 +26,6 @@ public class Cuenta {
         this.OwnedByCliente = cliente;
     }
 
-    public ArrayList<Transaccion> getListaTransacciones() {
-        return listaTransacciones;
-    }
-
-    public void setListaTransacciones(ArrayList<Transaccion> listaTransacciones) {
-        this.listaTransacciones = (listaTransacciones != null)
-                ? listaTransacciones
-                : new ArrayList<>();
-    }
 
     public double getSaldo() {
         return saldo;

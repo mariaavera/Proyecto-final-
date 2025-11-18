@@ -136,17 +136,16 @@ public class AnalizadorGastosController implements ClienteControlador {
     public void Volveraction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
-            );
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml"));
             Parent root = loader.load();
 
             VistaPrincipalController menu = loader.getController();
             menu.setCliente(cliente);
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Menú Principal");
-            stage.show();
+            Scene nuevaScene = new Scene(root);
+            stage.setScene(nuevaScene);
+            stage.sizeToScene();
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             e.printStackTrace();

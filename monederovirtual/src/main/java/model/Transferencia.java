@@ -29,18 +29,4 @@ public class Transferencia extends Transaccion{
         cuentaDestino.setSaldo(cuentaDestino.getSaldo() + valor);
         System.out.println("Transferencia realizada con éxito.");
     }
-
-    @Override
-    public String getDescripcion() {
-        return "Transferencia de: " + valor + " \nel " + fecha+",enviado a la cuenta: "+cuentaDestino;
-    }
-
-    public Cuenta getCuentaOrigen() {
-        return cuentaOrigen;
-    }
-
-    public Cuenta getCuentaDestino() {
-        return cuentaDestino;
-    }
-
 }

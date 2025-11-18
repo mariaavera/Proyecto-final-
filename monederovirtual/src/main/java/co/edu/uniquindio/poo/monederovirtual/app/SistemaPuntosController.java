@@ -6,12 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Cliente;
+import model.*;
 
-public class SistemaPuntosController implements ClienteControlador{
+public class SistemaPuntosController implements ClienteControlador {
 
     @FXML
     private Label lblPuntos;
@@ -25,6 +26,9 @@ public class SistemaPuntosController implements ClienteControlador{
     @FXML
     private TextField txtPuntosACanjear;
 
+    @FXML
+    private ComboBox<Cuenta> comboCuentas;
+
     private Cliente cliente;
 
     @Override
@@ -36,19 +40,14 @@ public class SistemaPuntosController implements ClienteControlador{
             return;
         }
 
+        comboCuentas.getItems().setAll(cliente.getCuentas());
+
         actualizarVista();
     }
 
     private void actualizarVista() {
         lblPuntos.setText("Puntos: " + cliente.getPuntos());
-        lblRango.setText("Rango: " + calcularRango(cliente.getPuntos()));
-    }
-
-    private String calcularRango(int puntos) {
-        if (puntos <= 500) return "Bronce";
-        if (puntos <= 1000) return "Plata";
-        if (puntos <= 5000) return "Oro";
-        return "Platino";
+        lblRango.setText("Rango: " + cliente.getRango());
     }
 
     @FXML
@@ -60,18 +59,37 @@ public class SistemaPuntosController implements ClienteControlador{
                 lblMensaje.setText("Ingresa una cantidad válida.");
                 return;
             }
-
-            if (cliente.getPuntos() >= cantidad) {
-
-                cliente.descontarPuntos(cantidad);
-
-                lblMensaje.setText("Canje exitoso. Te quedan: "
-                        + cliente.getPuntos() + " puntos.");
-
-                actualizarVista();
-
-            } else {
+            if (cliente.getPuntos() < cantidad) {
                 lblMensaje.setText("No tienes suficientes puntos.");
+                return;
+            }
+
+            Cuenta cuentaSeleccionada = comboCuentas.getValue();
+            if (cuentaSeleccionada == null) {
+                lblMensaje.setText("Selecciona una cuenta.");
+                return;
+            }
+
+            Beneficio beneficio = null;
+
+            if (cantidad == 1000) beneficio = new BeneficioBonoSaldo();
+            else if (cantidad == 500) beneficio = new BeneficioRetiro();
+            else if (cantidad == 100) beneficio = new BeneficioTransferencia();
+            else {
+                lblMensaje.setText("No existe un beneficio para esa cantidad de puntos.");
+                return;
+            }
+
+            boolean exito = cliente.canjear(beneficio);
+
+            if (exito) {
+                lblMensaje.setText(
+                        "Canje exitoso: " + beneficio.getNombre() +
+                                ". Te quedan " + cliente.getPuntos() + " puntos."
+                );
+                actualizarVista();
+            } else {
+                lblMensaje.setText("No se pudo realizar el canje.");
             }
 
         } catch (NumberFormatException e) {

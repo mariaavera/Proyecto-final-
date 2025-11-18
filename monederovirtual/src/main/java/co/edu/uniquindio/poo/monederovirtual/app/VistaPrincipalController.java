@@ -21,18 +21,19 @@ public class VistaPrincipalController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(ruta));
             Parent root = loader.load();
-
             Object controller = loader.getController();
-
             if (controller instanceof ClienteControlador cc) {
                 cc.setCliente(cliente);
             }
 
             Stage stage = (Stage) btnSalir.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene nuevaScene = new Scene(root);
+            stage.setScene(nuevaScene);
+            stage.sizeToScene();
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error cargando ventana: " + e.getMessage());
         }
     }
 

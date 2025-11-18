@@ -22,8 +22,5 @@ public class Retiro extends Transaccion{
     public void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
         cuentaOrigen.retirarDinero(valor);
     }
-    @Override
-    public String getDescripcion() {
-        return "Retiro de: " + valor + " en fecha " + fecha;
-    }
+
 }

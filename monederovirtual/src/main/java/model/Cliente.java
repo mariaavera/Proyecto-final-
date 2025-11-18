@@ -7,7 +7,7 @@ import java.util.List;
 public class Cliente {
     private String nombre;
     private String cedula;
-    private List<Cuenta> cuentas = new ArrayList<>();
+    private List<Cuenta> cuentas;
     private String contrasena;
     private int puntos;
     private TransaccionProgramada transaccionProgramada = null;
@@ -37,37 +37,10 @@ public class Cliente {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
     public String getContrasena() {
         return contrasena;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public TransaccionProgramada getTransaccionProgramada() {
-        return transaccionProgramada;
-    }
-
-    public void setTransaccionProgramada(TransaccionProgramada transaccionProgramada) {
-        this.transaccionProgramada = transaccionProgramada;
-    }
-
-    public List<MonederoVirtual> getMonederos() {
-        return monederos;
-    }
-
-    public void setMonederos(List<MonederoVirtual> monederos) {
-        this.monederos = monederos;
-    }
-
-    public LocalDate getRetirosGratisHasta() {
-        return retirosGratisHasta;
-    }
     public void agregarPuntos(int puntosGanados) {
         this.puntos += puntosGanados;
     }
@@ -79,42 +52,19 @@ public class Cliente {
         this.puntos = puntos;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public List<Cuenta> getCuentas() {
         return cuentas;
     }
 
-    public void setCuentas(List<Cuenta> cuentas) {
-        this.cuentas = cuentas;
-    }
-
-    public void rangoCliente(){
-        if(puntos>=0 && puntos<=500){
-            System.out.println("El rango del cliente es:Bronce");
-        }else if(puntos>=501 && puntos<=1000){
-            System.out.println("El rango del cliente es:Plata");
-        }else if(puntos>=1001 && puntos<=5000){
-            System.out.println("El rango del cliente es:Oro");
-        }else{
-            System.out.println("El rango del cliente es:Platino");
-        }
+    public String getRango() {
+        if (puntos <= 500) return "Bronce";
+        if (puntos <= 1000) return "Plata";
+        if (puntos <= 5000) return "Oro";
+        return "Platino";
     }
     public void registrarMonedero(MonederoVirtual monedero) {
         monederos.add(monedero);
         System.out.println("Monedero registrado correctamente: " + monedero.getNombre());
-    }
-    public MonederoVirtual getMonederoPrincipal() {
-        return monederos.get(0);
-    }
-    public double getDescuentoTransferencias() {
-        return descuentoTransferencias;
     }
 
     public void setDescuentoTransferencias(double descuento) {
@@ -124,9 +74,7 @@ public class Cliente {
     public void setRetirosGratisHasta(LocalDate fecha) {
         this.retirosGratisHasta = fecha;
     }
-    public boolean tieneRetirosGratis() {
-        return retirosGratisHasta != null && LocalDate.now().isBefore(retirosGratisHasta);
-    }
+
     public void descontarPuntos(int p) {
         puntos -= p;
     }

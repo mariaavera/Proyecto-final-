@@ -8,13 +8,10 @@ public class BeneficioBonoSaldo extends Beneficio implements Puntos{
     public void aplicarBeneficio(Cliente cliente) {
 
         cliente.getCuentas().forEach(cuenta -> {
-            Transaccion bono = new Deposito(
-                    50.0,
-                    cliente,
-                    "Bono de 50 unidades",
-                    cuenta
-            );
-            bono.ejecutar(null, null);
+            cuenta.depositarDinero(50.0);
         });
+
+        System.out.println("Aplicado: Bono de 50 unidades a todas las cuentas.");
     }
 }
+

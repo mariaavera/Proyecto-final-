@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.Cuenta;
-import model.GenerarCuentas;
 
 public class CrearCuentaController implements ClienteControlador{
 

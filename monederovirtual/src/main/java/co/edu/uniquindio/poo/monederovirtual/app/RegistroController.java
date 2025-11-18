@@ -51,7 +51,7 @@ public class RegistroController {
 
         Cuenta cuenta = new Cuenta(
                 0,
-                generarNumeroCuenta(),
+                GenerarCuentas.generarNumero(),
                 cliente
         );
 
@@ -77,10 +77,6 @@ public class RegistroController {
         PauseTransition pause = new PauseTransition(Duration.seconds(4));
         pause.setOnFinished(event -> cerrarVentana());
         pause.play();
-    }
-
-    private String generarNumeroCuenta() {
-        return "CU" + (int)(Math.random() * 900000 + 100000);
     }
 
     private void cerrarVentana() {

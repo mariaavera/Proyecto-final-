@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseInformacionCliente {
-    private static List<Cliente> clientes = new ArrayList<>();
+    private static final List<Cliente> clientes = new ArrayList<>();
     private static MonederoVirtual monederoActual;
 
     public BaseInformacionCliente() {
@@ -12,14 +12,6 @@ public class BaseInformacionCliente {
 
     public static void agregarCliente(Cliente cliente) {
         clientes.add(cliente);
-    }
-
-    public static List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public static void setClientes(List<Cliente> clientes) {
-        BaseInformacionCliente.clientes = clientes;
     }
 
     public static Cliente buscarPorCedula(String cedula) {
@@ -43,24 +35,8 @@ public class BaseInformacionCliente {
         }
         return null;
     }
-    public static void setMonederoActual(MonederoVirtual monedero) {
-        monederoActual = monedero;
-    }
     public static MonederoVirtual getMonederoActual() {
         return monederoActual;
-    }
-    public static Cliente buscarCliente(String usuario, String clave) {
-
-        for (Cliente cliente : clientes) {
-
-            if (cliente.getNombre().equals(usuario)
-                    && cliente.getContrasena().equals(clave)) {
-
-                return cliente;
-            }
-        }
-
-        return null;
     }
 
 }

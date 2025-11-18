@@ -18,9 +18,6 @@ public class Multimonedero extends MonederoVirtual implements TransaccionProgram
         monederos.add(m);
     }
 
-    public List<MonederoVirtual> getMonederos() {
-        return new ArrayList<>(monederos);
-    }
     @Override
     public void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion) {
         transProgramadas.add(transaccion);
@@ -42,13 +39,6 @@ public class Multimonedero extends MonederoVirtual implements TransaccionProgram
                 System.out.println("Transacción cancelada o interrumpida");
             }
         }).start();
-    }
-
-
-    @Override
-    public void cancelarTransaccionProgramada(String registro) {
-        transProgramadas.removeIf(t -> t.getId().equals(registro));
-        fechasProgramadas.remove(registro);
     }
 
 }

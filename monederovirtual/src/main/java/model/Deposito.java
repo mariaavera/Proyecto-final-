@@ -22,8 +22,5 @@ public class Deposito extends Transaccion{
     public void ejecutar(Cuenta cuentaOrigen, Cuenta cuentaDestino) {
         cuentaDestino.depositarDinero(valor);
     }
-    @Override
-    public String getDescripcion() {
-        return "Deposito de: " + valor + " en fecha " + fecha;
-    }
+
 }

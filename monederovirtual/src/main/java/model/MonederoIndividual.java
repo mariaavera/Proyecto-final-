@@ -33,9 +33,4 @@ public class MonederoIndividual extends MonederoVirtual implements TransaccionPr
         }).start();
     }
 
-    @Override
-    public void cancelarTransaccionProgramada(String registro) {
-        transProgramadas.removeIf(t -> t.getId().equals(registro));
-        fechasProgramadas.remove(registro);
-    }
 }

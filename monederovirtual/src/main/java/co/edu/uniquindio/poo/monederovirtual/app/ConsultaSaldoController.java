@@ -46,7 +46,7 @@ public class ConsultaSaldoController implements ClienteControlador {
 
     public void inicializarDatos() {
         if (cuenta != null) {
-            lblSaldo.setText("Saldo actual: " + cuenta.getSaldo());
+            lblSaldo.setText("Saldo actual: " + cuenta.consultaSaldo());
         } else {
             lblSaldo.setText("No hay cuenta disponible");
         }
