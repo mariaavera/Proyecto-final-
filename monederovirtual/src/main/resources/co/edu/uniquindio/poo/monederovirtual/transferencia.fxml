@@ -7,34 +7,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.TransferenciaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.TransferenciaController">
    <children>
-      <Label layoutX="110.0" text="Transferencia" textFill="#4400ff">
+      <Label layoutX="69.0" layoutY="14.0" text="Transferencia" textFill="#4400ff">
          <font>
-            <Font size="41.0" />
+            <Font size="56.0" />
          </font>
       </Label>
-      <Button fx:id="btnTransferirDinero" layoutX="159.0" layoutY="199.0" mnemonicParsing="false" onAction="#TransferirDineroaction" text="Transferir Dinero">
+      <Button fx:id="btnTransferirDinero" layoutX="161.0" layoutY="243.0" mnemonicParsing="false" onAction="#TransferirDineroaction" text="Transferir Dinero">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="txtCuentaDestinatario" layoutX="81.0" layoutY="110.0" prefHeight="25.0" prefWidth="297.0" promptText="Numero de cuenta del destinatario">
+      <TextField fx:id="txtCuentaDestinatario" layoutX="83.0" layoutY="150.0" prefHeight="25.0" prefWidth="297.0" promptText="Numero de cuenta del destinatario">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtValorATransferir" layoutX="79.0" layoutY="156.0" prefHeight="25.0" prefWidth="297.0" promptText="Valor a transferir">
+      <TextField fx:id="txtValorATransferir" layoutX="81.0" layoutY="200.0" prefHeight="25.0" prefWidth="297.0" promptText="Valor a transferir">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="txtCuentaOrigen" layoutX="79.0" layoutY="68.0" prefHeight="35.0" prefWidth="303.0" promptText="Cuenta Origen" />
-      <Label fx:id="lblMensaje" layoutX="20.0" layoutY="244.0" prefHeight="59.0" prefWidth="429.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnVolver" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
+      <Label fx:id="lblMensaje" layoutX="55.0" layoutY="308.0" prefHeight="53.0" prefWidth="351.0" />
+      <Button fx:id="btnVolver" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
+      <ComboBox fx:id="cbCuentaOrigen" layoutX="81.0" layoutY="97.0" prefHeight="45.0" prefWidth="297.0" promptText="Cuenta Origen" />
    </children>
 </AnchorPane>

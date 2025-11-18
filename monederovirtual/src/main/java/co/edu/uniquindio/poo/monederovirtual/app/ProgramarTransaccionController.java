@@ -31,18 +31,12 @@ public class ProgramarTransaccionController implements ClienteControlador{
     private Cliente cliente;
     private MonederoVirtual monedero;
 
-    // ============================================================
-    //  IMPLEMENTACIÓN DE LA INTERFAZ
-    // ============================================================
     @Override
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
         inicializarConCliente(cliente);
     }
 
-    // ============================================================
-    // INICIALIZAR DATOS CON EL CLIENTE
-    // ============================================================
     private void inicializarConCliente(Cliente cliente) {
 
         this.monedero = BaseInformacionCliente.getMonederoActual();
@@ -64,9 +58,6 @@ public class ProgramarTransaccionController implements ClienteControlador{
         cbTipoTransaccion.getItems().setAll("Depósito", "Transferencia");
     }
 
-    // ============================================================
-    // PROGRAMAR
-    // ============================================================
     @FXML
     public void Programaraction() {
 

@@ -19,7 +19,7 @@ import javafx.scene.control.Label;
 
 public class TransferenciaController implements ClienteControlador{
 
-    @FXML private ComboBox<String> txtCuentaOrigen;
+    @FXML private ComboBox<String> cbCuentaOrigen;
     @FXML private TextField txtValorATransferir;
     @FXML private TextField txtCuentaDestinatario;
     @FXML private Label lblMensaje;
@@ -31,7 +31,7 @@ public class TransferenciaController implements ClienteControlador{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
 
-        txtCuentaOrigen.getItems().clear();
+        cbCuentaOrigen.getItems().clear();
 
         if (cliente == null || cliente.getCuentas().isEmpty()) {
             lblMensaje.setText("No tienes cuentas registradas.");
@@ -39,17 +39,17 @@ public class TransferenciaController implements ClienteControlador{
         }
 
         for (Cuenta cuenta : cliente.getCuentas()) {
-            txtCuentaOrigen.getItems().add(cuenta.getId());
+            cbCuentaOrigen.getItems().add(cuenta.getId());
         }
 
-        txtCuentaOrigen.getSelectionModel().selectFirst();
+        cbCuentaOrigen.getSelectionModel().selectFirst();
         cuentaOrigen = cliente.getCuentas().getFirst();
     }
 
     @FXML
     public void TransferirDineroaction() {
         try {
-            String numeroOrigen = txtCuentaOrigen.getValue();
+            String numeroOrigen = cbCuentaOrigen.getValue();
             if (numeroOrigen == null) {
                 lblMensaje.setText("Seleccione la cuenta origen.");
                 return;

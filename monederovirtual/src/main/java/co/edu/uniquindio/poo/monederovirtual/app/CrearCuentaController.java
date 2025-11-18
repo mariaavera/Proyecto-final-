@@ -70,11 +70,11 @@ public class CrearCuentaController implements ClienteControlador{
             Parent root = loader.load();
 
             VistaPrincipalController controller = loader.getController();
-            controller.setCliente(cliente);
+            controller.setCliente(cliente);   // ← ESTA LÍNEA ES LA CLAVE
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.setTitle("Menú Principal");
             stage.show();
 

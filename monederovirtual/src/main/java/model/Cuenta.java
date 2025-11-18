@@ -89,7 +89,7 @@ public class Cuenta {
         destino.saldo += valor;
         int puntosGanados = (int)(valor / 100) * 3;
         if (cliente != null) cliente.agregarPuntos(puntosGanados);
-        return String.format("Transferencia exitosa. Monto: %.2f. Puntos ganados: %d. Puntos totales: %d",
+        return String.format("Transferencia exitosa. Monto: %.2f."+"\n"+" Puntos ganados: %d. Puntos totales: %d",
                 valor, puntosGanados, cliente != null ? cliente.getPuntos() : 0);
     }
     public double consultaSaldo(){
@@ -111,7 +111,7 @@ public class Cuenta {
     }
     @Override
     public String toString() {
-        return "Cuenta " + id;
+        return "Cuenta #" + id + " - Saldo: " + saldo;
     }
 }
 

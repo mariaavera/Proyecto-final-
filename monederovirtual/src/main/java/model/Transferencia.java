@@ -31,7 +31,7 @@ public class Transferencia extends Transaccion{
 
     @Override
     public String getDescripcion() {
-        return "Transferencia de: " + valor + " el " + fecha+",enviado a la cuenta: "+cuentaDestino;
+        return "Transferencia de: " + valor + " \nel " + fecha+",enviado a la cuenta: "+cuentaDestino;
     }
 
     public Cuenta getCuentaOrigen() {
