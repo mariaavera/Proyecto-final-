@@ -46,15 +46,12 @@ public class ProgramarTransaccionController implements ClienteControlador{
             return;
         }
 
-        // Cargar cuentas
         cbCuentaOrigen.getItems().setAll(cliente.getCuentas());
         cbCuentaDestino.getItems().setAll(cliente.getCuentas());
 
         if (!cliente.getCuentas().isEmpty()) {
             cbCuentaOrigen.getSelectionModel().select(0);
         }
-
-        // Tipos de transacción
         cbTipoTransaccion.getItems().setAll("Depósito", "Transferencia");
     }
 
@@ -124,9 +121,6 @@ public class ProgramarTransaccionController implements ClienteControlador{
         }
     }
 
-    // ============================================================
-    // RETORNAR AL MENÚ
-    // ============================================================
     @FXML
     public void Cerraraction(javafx.event.ActionEvent event) {
         try {

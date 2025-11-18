@@ -13,7 +13,7 @@ public class Cuenta {
         }
         this.saldo = saldo;
         this.id = numero;
-        this.OwnedByCliente = OwnedByCliente;
+        this.OwnedByCliente = cliente;
         this.listaTransacciones = new ArrayList<>();
     }
 
@@ -23,7 +23,7 @@ public class Cuenta {
     }
 
     public void setCliente(Cliente cliente) {
-        this.OwnedByCliente = OwnedByCliente;
+        this.OwnedByCliente = cliente;
     }
 
     public ArrayList<Transaccion> getListaTransacciones() {

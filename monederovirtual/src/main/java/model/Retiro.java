@@ -8,6 +8,7 @@ public class Retiro extends Transaccion{
     public Retiro(double valor, Cliente cliente, String concepto,Cuenta cuentaOrigen) {
         super(valor, cliente,concepto);
         this.cuentaOrigen = cuentaOrigen;
+        this.puntosGanados = (int)(valor / 100) * 2;
     }
 
     public Cuenta getCuentaOrigen() {

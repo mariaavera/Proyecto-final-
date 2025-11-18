@@ -9,6 +9,7 @@ public abstract class Transaccion {
     protected String id;
     protected Cliente cliente;
     protected String concepto;
+    protected int puntosGanados;
 
     public Transaccion(double valor,Cliente cliente,String concepto) {
         this.valor = valor;
@@ -16,6 +17,10 @@ public abstract class Transaccion {
         this.id = generarId();
         this.cliente = cliente;
         this.concepto=concepto;
+    }
+
+    public int getPuntosGanados() {
+        return puntosGanados;
     }
 
     public String getConcepto() {

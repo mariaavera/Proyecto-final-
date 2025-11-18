@@ -62,12 +62,11 @@ public class DepositarDineroController implements ClienteControlador{
             VistaPrincipalController menuController = loader.getController();
             menuController.setCliente(cliente);
 
-            Stage stage = new Stage();
-            stage.setTitle("Menú Principal");
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage stageActual = (Stage) txtDepositoDinero.getScene().getWindow();
 
-            ((Stage) txtDepositoDinero.getScene().getWindow()).close();
+            stageActual.setScene(new Scene(root));
+            stageActual.setTitle("Menú Principal");
+            stageActual.show();
 
         } catch (Exception e) {
             e.printStackTrace();

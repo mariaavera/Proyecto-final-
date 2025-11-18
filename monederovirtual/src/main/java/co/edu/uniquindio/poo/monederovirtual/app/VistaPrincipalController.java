@@ -28,14 +28,14 @@ public class VistaPrincipalController {
                 cc.setCliente(cliente);
             }
 
-            Stage stage = new Stage();
+            Stage stage = (Stage) btnSalir.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void DepositarDineroaction() {
         abrirVentanaConCliente("/co/edu/uniquindio/poo/monederovirtual/depositarDinero.fxml");

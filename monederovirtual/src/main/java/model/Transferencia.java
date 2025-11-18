@@ -11,6 +11,7 @@ public class Transferencia extends Transaccion{
         super(monto, cliente,concepto);
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
+        this.puntosGanados = (int)(valor / 100) * 3;
     }
 
 
