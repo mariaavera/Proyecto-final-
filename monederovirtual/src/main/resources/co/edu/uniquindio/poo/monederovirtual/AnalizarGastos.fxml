@@ -11,12 +11,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.AnalizadorGastosController">
    <children>
-      <Label layoutX="122.0" prefHeight="88.0" prefWidth="499.0" text="Visualización Gastos" textFill="#4800ff">
+      <Label layoutX="88.0" layoutY="1.0" prefHeight="88.0" prefWidth="433.0" text="Visualización Gastos" textFill="#4800ff">
          <font>
-            <Font size="56.0" />
+            <Font size="48.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboCategoria" layoutX="302.0" layoutY="76.0" prefHeight="25.0" prefWidth="186.0" promptText="Categoría" />
+      <ComboBox fx:id="comboCategoria" layoutX="250.0" layoutY="76.0" prefHeight="25.0" prefWidth="186.0" promptText="Categoría" />
       <TableView fx:id="tableGastos" layoutX="9.0" layoutY="116.0" prefHeight="206.0" prefWidth="440.0">
         <columns>
           <TableColumn fx:id="colFecha" prefWidth="79.0" text="Fecha" />
@@ -25,8 +25,8 @@
             <TableColumn fx:id="colMonto" prefWidth="127.0" text="Monto" />
         </columns>
       </TableView>
-      <Button fx:id="btnActualizar" layoutX="563.0" layoutY="76.0" mnemonicParsing="false" text="Filtrar" />
-      <ComboBox fx:id="comboPeriodo" layoutX="74.0" layoutY="76.0" prefHeight="25.0" prefWidth="186.0" promptText="Periodo (Dia/Mes/Año)" />
+      <Button fx:id="btnActualizar" layoutX="463.0" layoutY="76.0" mnemonicParsing="false" text="Filtrar" />
+      <ComboBox fx:id="comboPeriodo" layoutX="22.0" layoutY="76.0" prefHeight="25.0" prefWidth="186.0" promptText="Periodo (Dia/Mes/Año)" />
       <PieChart fx:id="pieChartGastos" layoutX="463.0" layoutY="125.0" prefHeight="189.0" prefWidth="176.0" title="Gráfica" />
       <Label layoutX="29.0" layoutY="337.0" prefHeight="25.0" prefWidth="171.0" text="Total gastado en el periodo:">
          <font>
@@ -48,6 +48,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnVolver" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
+      <ComboBox fx:id="cbCuenta" layoutX="518.0" layoutY="32.0" prefWidth="150.0" promptText="Cuenta" />
+      <Button fx:id="btnVolver" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
    </children>
 </AnchorPane>

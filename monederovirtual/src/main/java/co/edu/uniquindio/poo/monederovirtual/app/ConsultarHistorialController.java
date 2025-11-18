@@ -1,4 +1,6 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,13 +41,32 @@ public class ConsultarHistorialController implements ClienteControlador{
     @FXML
     private ComboBox<Cuenta> cbCuentaHistorial;
 
-    // Se ejecuta cuando los controles FXML YA están listos
+
     @FXML
     public void initialize() {
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        colMonto.setCellValueFactory(new PropertyValueFactory<>("monto"));
-        colPuntos.setCellValueFactory(new PropertyValueFactory<>("puntosGanados"));
+
+        colFecha.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getFecha().toString()));
+
+        colTipo.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getClass().getSimpleName()));
+
+        colMonto.setCellValueFactory(cellData ->
+                new SimpleObjectProperty<>(cellData.getValue().getValor()));
+
+        colPuntos.setCellValueFactory(cellData -> {
+
+            Transaccion t = cellData.getValue();
+
+            try {
+                var metodo = t.getClass().getMethod("getPuntosGanados");
+                Object puntos = metodo.invoke(t);
+                return new SimpleObjectProperty<>((Integer) puntos);
+
+            } catch (Exception e) {
+                return new SimpleObjectProperty<>(0);
+            }
+        });
 
         cbCuentaHistorial.setOnAction(e -> {
             Cuenta seleccionada = cbCuentaHistorial.getValue();
@@ -54,6 +75,7 @@ public class ConsultarHistorialController implements ClienteControlador{
             }
         });
     }
+
 
     @Override
     public void setCliente(Cliente cliente) {

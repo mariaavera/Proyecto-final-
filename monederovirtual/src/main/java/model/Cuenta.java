@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Cuenta {
     private double saldo;
     private String id;
-    private Cliente cliente;
+    private Cliente OwnedByCliente;
     private ArrayList<Transaccion> listaTransacciones;
 
     public Cuenta(double saldo, String numero,Cliente cliente) {
@@ -13,17 +13,17 @@ public class Cuenta {
         }
         this.saldo = saldo;
         this.id = numero;
-        this.cliente = cliente;
+        this.OwnedByCliente = OwnedByCliente;
         this.listaTransacciones = new ArrayList<>();
     }
 
 
     public Cliente getCliente() {
-        return cliente;
+        return OwnedByCliente;
     }
 
     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        this.OwnedByCliente = OwnedByCliente;
     }
 
     public ArrayList<Transaccion> getListaTransacciones() {
@@ -57,12 +57,12 @@ public class Cuenta {
         }
         saldo += valorADepositar;
         int puntosGanados = (int)(valorADepositar / 100);
-        cliente.agregarPuntos(puntosGanados);
+        OwnedByCliente.agregarPuntos(puntosGanados);
         if (listaTransacciones == null) {
             listaTransacciones = new ArrayList<>();
         }
         listaTransacciones.add(
-                new Deposito(valorADepositar, cliente, "Depósito a monedero principal", this)
+                new Deposito(valorADepositar, OwnedByCliente, "Depósito a monedero principal", this)
         );
         return "Depósito exitoso.\nPuntos ganados: " + puntosGanados;
     }
@@ -74,9 +74,9 @@ public class Cuenta {
         }else{
             saldo-=valorARetirar;
             int puntosGanados = (int)(valorARetirar / 100) * 2;
-            cliente.agregarPuntos(puntosGanados);
+            OwnedByCliente.agregarPuntos(puntosGanados);
             String concepto = "Retiro del monedero principal";
-            listaTransacciones.add(new Retiro(valorARetirar, cliente, concepto,this));
+            listaTransacciones.add(new Retiro(valorARetirar, OwnedByCliente, concepto,this));
             return "Retiro exitoso.\nPuntos ganados: " + puntosGanados;
         }
     }
@@ -88,9 +88,11 @@ public class Cuenta {
         this.saldo -= valor;
         destino.saldo += valor;
         int puntosGanados = (int)(valor / 100) * 3;
-        if (cliente != null) cliente.agregarPuntos(puntosGanados);
+        String concepto = "Transferencia al monedero principal";
+        if (OwnedByCliente != null) OwnedByCliente.agregarPuntos(puntosGanados);
+        listaTransacciones.add(new Transferencia(valor, OwnedByCliente, concepto,this,destino));
         return String.format("Transferencia exitosa. Monto: %.2f."+"\n"+" Puntos ganados: %d. Puntos totales: %d",
-                valor, puntosGanados, cliente != null ? cliente.getPuntos() : 0);
+                valor, puntosGanados, OwnedByCliente != null ? OwnedByCliente.getPuntos() : 0);
     }
     public double consultaSaldo(){
         return saldo;
