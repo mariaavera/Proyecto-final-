@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Cliente;
 
-public class VistaPrincipalController {
+public class VistaPrincipalController implements ClienteControlador{
     private Cliente cliente;
 
     @FXML
