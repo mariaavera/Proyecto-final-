@@ -50,5 +50,10 @@
       </Label>
       <ComboBox fx:id="cbCuenta" layoutX="518.0" layoutY="32.0" prefWidth="150.0" promptText="Cuenta" />
       <Button fx:id="btnVolver" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
+      <Label fx:id="lblAlerta" layoutX="389.0" layoutY="327.0" prefHeight="156.0" prefWidth="285.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

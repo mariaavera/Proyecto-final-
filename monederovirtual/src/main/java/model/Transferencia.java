@@ -39,15 +39,8 @@ public class Transferencia extends Transaccion{
         return cuentaOrigen;
     }
 
-    public void setCuentaOrigen(Cuenta cuentaOrigen) {
-        this.cuentaOrigen = cuentaOrigen;
-    }
-
     public Cuenta getCuentaDestino() {
         return cuentaDestino;
     }
 
-    public void setCuentaDestino(Cuenta cuentaDestino) {
-        this.cuentaDestino = cuentaDestino;
-    }
 }

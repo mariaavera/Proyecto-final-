@@ -26,11 +26,12 @@ public class AnalizadorGastosController implements ClienteControlador {
     @FXML private TableColumn<Transaccion, Double> colMonto;
     @FXML private ComboBox<String> comboCategoria;
     @FXML private ComboBox<String> comboPeriodo;
-    @FXML private ComboBox<String> cbCuenta;   // <-- NUEVO
+    @FXML private ComboBox<String> cbCuenta;
     @FXML private Label lblPromedio;
     @FXML private Label lblTotal;
     @FXML private PieChart pieChartGastos;
     @FXML private TableView<Transaccion> tableGastos;
+    @FXML private Label lblAlerta;
 
     private Cliente cliente;
     private AnalizadorGastos analizador;
@@ -46,7 +47,7 @@ public class AnalizadorGastosController implements ClienteControlador {
             vistaInicializada = true;
         }
 
-        cargarCuentas();  // <-- NUEVO
+        cargarCuentas();
         actualizarVista();
     }
 
@@ -74,7 +75,6 @@ public class AnalizadorGastosController implements ClienteControlador {
         btnActualizar.setOnAction(e -> actualizarVista());
     }
 
-    /** Cargar las cuentas disponibles en el ComboBox */
     private void cargarCuentas() {
         cbCuenta.getItems().clear();
         if (cliente != null && cliente.getCuentas() != null) {
@@ -87,11 +87,9 @@ public class AnalizadorGastosController implements ClienteControlador {
     private void actualizarVista() {
         if (cliente == null || analizador == null) return;
 
-        // Obtener mes
         Integer mes = comboPeriodo.getSelectionModel().getSelectedIndex() + 1;
         String categoriaSeleccionada = comboCategoria.getValue();
 
-        // Obtener la cuenta seleccionada
         String cuentaSeleccionada = cbCuenta.getValue();
 
         if (cuentaSeleccionada == null) {
@@ -102,7 +100,6 @@ public class AnalizadorGastosController implements ClienteControlador {
             return;
         }
 
-        // Filtrar SOLO transacciones de la cuenta elegida
         List<Transaccion> lista = cliente.getCuentas()
                 .stream()
                 .filter(c -> c.getId().equals(cuentaSeleccionada))
@@ -116,8 +113,6 @@ public class AnalizadorGastosController implements ClienteControlador {
                 .toList();
 
         tableGastos.setItems(FXCollections.observableArrayList(filtradas));
-
-        // Gráfica
         pieChartGastos.getData().clear();
         double total = filtradas.stream().mapToDouble(Transaccion::getValor).sum();
 
@@ -132,6 +127,9 @@ public class AnalizadorGastosController implements ClienteControlador {
         lblPromedio.setText(
                 "Promedio mensual: " + analizador.calcularPromedioGastoMensual(LocalDate.now().getYear())
         );
+        int año = LocalDate.now().getYear();
+        String alerta = analizador.generarAlerta(mes, año);
+        lblAlerta.setText(alerta);
     }
 
     @FXML

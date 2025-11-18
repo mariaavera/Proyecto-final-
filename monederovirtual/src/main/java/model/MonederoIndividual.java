@@ -22,13 +22,13 @@ public class MonederoIndividual extends MonederoVirtual implements TransaccionPr
                     LocalDate hoy = LocalDate.now();
                     if (hoy.isEqual(fechaEjecucion)) {
                         transaccion.ejecutar(cuentaOrigen, cuentaDestino);
-                        System.out.println("💸 Transacción ejecutada automáticamente el " + hoy);
+                        System.out.println("Transacción ejecutada automáticamente el " + hoy);
                         break;
                     }
                     Thread.sleep(1000 * 60 * 60 * 24);
                 }
             } catch (InterruptedException e) {
-                System.out.println("⏹ Transacción cancelada o interrumpida");
+                System.out.println("Transacción cancelada o interrumpida");
             }
         }).start();
     }

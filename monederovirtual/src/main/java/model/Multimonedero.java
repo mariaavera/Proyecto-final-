@@ -39,7 +39,7 @@ public class Multimonedero extends MonederoVirtual implements TransaccionProgram
                     Thread.sleep(1000 * 60 * 60 * 24);
                 }
             } catch (InterruptedException e) {
-                System.out.println("⏹ Transacción cancelada o interrumpida");
+                System.out.println("Transacción cancelada o interrumpida");
             }
         }).start();
     }

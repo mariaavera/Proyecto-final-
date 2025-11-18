@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.BaseInformacionCliente;
 import model.Cliente;
 import model.Cuenta;

@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Deposito extends Transaccion{
     private Cuenta cuentaDestino;
 
