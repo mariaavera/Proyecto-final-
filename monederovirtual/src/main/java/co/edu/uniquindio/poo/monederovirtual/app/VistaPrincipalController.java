@@ -30,6 +30,7 @@ public class VistaPrincipalController {
             Scene nuevaScene = new Scene(root);
             stage.setScene(nuevaScene);
             stage.sizeToScene();
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             e.printStackTrace();
