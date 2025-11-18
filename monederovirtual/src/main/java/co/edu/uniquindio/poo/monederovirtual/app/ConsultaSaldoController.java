@@ -10,19 +10,22 @@ import javafx.stage.Stage;
 import model.Cliente;
 import model.Cuenta;
 
-public class ConsultaSaldoController {
+public class ConsultaSaldoController implements ClienteControlador{
     @FXML
     private Label lblSaldo;
 
     private Cuenta cuenta;
     private Cliente cliente;
-
+@Override
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
 
-        if (cliente.getCuentas() != null && !cliente.getCuentas().isEmpty()) {
+        if (cliente != null && cliente.getCuentas() != null && !cliente.getCuentas().isEmpty()) {
             this.cuenta = cliente.getCuentas().get(0);
+        } else {
+            this.cuenta = null;
         }
+
         inicializarDatos();
     }
 
@@ -40,7 +43,7 @@ public class ConsultaSaldoController {
                     "/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml"));
 
             Parent root = loader.load();
-            MenuPrincipalController controller = loader.getController();
+            VistaPrincipalController controller = loader.getController();
             controller.setCliente(cliente);
 
             Stage stage = (Stage) lblSaldo.getScene().getWindow();

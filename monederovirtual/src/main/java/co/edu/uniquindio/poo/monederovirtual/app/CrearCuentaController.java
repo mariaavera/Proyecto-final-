@@ -13,39 +13,46 @@ import model.Cliente;
 import model.Cuenta;
 import model.GenerarCuentas;
 
-public class CrearCuentaController {
+public class CrearCuentaController implements ClienteControlador{
+
     @FXML
-    private TextField txtSaldo;
+    private TextField txtSaldoInicial;
 
     private Cliente cliente;
 
+
+    @Override
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
     @FXML
     private void CrearCuentaaction() {
-        if (cliente == null) return;
 
-        double saldoInicial;
-        try {
-            saldoInicial = Double.parseDouble(txtSaldo.getText());
-        } catch (Exception e) {
-            mostrarMensaje("Saldo inválido");
+        if (cliente == null) {
+            mostrarMensaje("Error: No se recibió el cliente.");
             return;
         }
 
-        Cuenta nueva = new Cuenta(
-                saldoInicial,
-                GenerarCuentas.generarNumero(),
-                cliente
-        );
+        double saldoInicial;
 
-        cliente.getCuentas().add(nueva);
+        try {
+            saldoInicial = Double.parseDouble(txtSaldoInicial.getText());
+            if (saldoInicial < 0) {
+                mostrarMensaje("El saldo no puede ser negativo.");
+                return;
+            }
+        } catch (Exception e) {
+            mostrarMensaje("Saldo inválido.");
+            return;
+        }
 
-        mostrarMensaje("Cuenta creada exitosamente.\nNúmero: " + nueva.getId());
-        txtSaldo.clear();
+        Cuenta cuentaNueva = cliente.crearNuevaCuenta(saldoInicial);
+
+        mostrarMensaje("Cuenta creada exitosamente.\nNúmero: " + cuentaNueva.getId());
+        txtSaldoInicial .clear();
     }
+
 
     private void mostrarMensaje(String msg) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -53,6 +60,7 @@ public class CrearCuentaController {
         alerta.setContentText(msg);
         alerta.show();
     }
+
     @FXML
     public void Volveraction(ActionEvent event) {
         try {
@@ -61,10 +69,12 @@ public class CrearCuentaController {
             );
             Parent root = loader.load();
 
+            VistaPrincipalController controller = loader.getController();
+            controller.setCliente(cliente);
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.setTitle("Menú Principal");
             stage.show();
 
@@ -74,4 +84,3 @@ public class CrearCuentaController {
         }
     }
 }
-

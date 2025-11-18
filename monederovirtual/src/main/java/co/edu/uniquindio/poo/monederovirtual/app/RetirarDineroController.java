@@ -14,12 +14,13 @@ import model.Cuenta;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
-public class RetirarDineroController {
+public class RetirarDineroController implements ClienteControlador{
+
     private Cliente cliente;
     private Cuenta cuentaActiva;
 
     @FXML
-    private ComboBox<Cuenta> comboCuentas;   // nuevo
+    private ComboBox<Cuenta> comboCuentas;
 
     @FXML
     private TextField txtRetirarDinero;
@@ -27,15 +28,21 @@ public class RetirarDineroController {
     @FXML
     private Label lblMensaje;
 
+    @Override
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
-        ObservableList<Cuenta> cuentas = FXCollections.observableArrayList(cliente.getCuentas());
-        comboCuentas.setItems(cuentas);
+
+        if (cliente == null || cliente.getCuentas().isEmpty()) {
+            lblMensaje.setText("No tienes cuentas registradas.");
+            return;
+        }
+
+        comboCuentas.getItems().setAll(cliente.getCuentas());
+
         comboCuentas.setConverter(new StringConverter<Cuenta>() {
             @Override
             public String toString(Cuenta cuenta) {
-                if (cuenta == null) return "Sin cuentas";
-                return cuenta.getId();
+                return (cuenta == null) ? "" : cuenta.getId();
             }
 
             @Override
@@ -44,25 +51,16 @@ public class RetirarDineroController {
             }
         });
 
-        if (!cuentas.isEmpty()) {
-            comboCuentas.getSelectionModel().selectFirst();
-            cuentaActiva = comboCuentas.getValue();
-        } else {
-            cuentaActiva = null;
-            lblMensaje.setText("No tienes cuentas registradas. Crea una cuenta primero.");
-        }
-        comboCuentas.setOnAction(ev -> {
-            cuentaActiva = comboCuentas.getValue();
-            if (cuentaActiva != null) {
-                lblMensaje.setText("Cuenta seleccionada: " + cuentaActiva.getId());
-            }
-        });
+        comboCuentas.getSelectionModel().selectFirst();
+        cuentaActiva = comboCuentas.getValue();
+
+        comboCuentas.setOnAction(ev -> cuentaActiva = comboCuentas.getValue());
     }
 
     @FXML
     public void RetirarDineroaction() {
         if (cuentaActiva == null) {
-            lblMensaje.setText("Selecciona una cuenta primero.");
+            lblMensaje.setText("Seleccione una cuenta.");
             return;
         }
 
@@ -73,9 +71,6 @@ public class RetirarDineroController {
 
         } catch (NumberFormatException e) {
             lblMensaje.setText("Ingrese un número válido.");
-        } catch (Exception e) {
-            lblMensaje.setText("Error al procesar la operación.");
-            e.printStackTrace();
         }
     }
 
@@ -87,12 +82,14 @@ public class RetirarDineroController {
             );
 
             Parent root = loader.load();
-            MenuPrincipalController menuController = loader.getController();
+            VistaPrincipalController menuController = loader.getController();
             menuController.setCliente(cliente);
+
             Stage stage = new Stage();
             stage.setTitle("Menú Principal");
             stage.setScene(new Scene(root));
             stage.show();
+
             ((Stage) txtRetirarDinero.getScene().getWindow()).close();
 
         } catch (Exception e) {
@@ -100,4 +97,5 @@ public class RetirarDineroController {
         }
     }
 }
+
 

@@ -17,86 +17,96 @@ import model.Transaccion;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AnalizadorGastosController {
+public class AnalizadorGastosController implements ClienteControlador {
 
-        @FXML
-        private Button btnActualizar;
+    @FXML private Button btnActualizar;
+    @FXML private TableColumn<Transaccion, String> colCategoria;
+    @FXML private TableColumn<Transaccion, String> colConcepto;
+    @FXML private TableColumn<Transaccion, LocalDate> colFecha;
+    @FXML private TableColumn<Transaccion, Double> colMonto;
+    @FXML private ComboBox<String> comboCategoria;
+    @FXML private ComboBox<String> comboPeriodo;
+    @FXML private Label lblPromedio;
+    @FXML private Label lblTotal;
+    @FXML private PieChart pieChartGastos;
+    @FXML private TableView<Transaccion> tableGastos;
 
-        @FXML
-        private TableColumn<Transaccion, String> colCategoria;
+    private Cliente cliente;
+    private AnalizadorGastos analizador;
+    private boolean vistaInicializada = false;
 
-        @FXML
-        private TableColumn<Transaccion, String> colConcepto;
-
-        @FXML
-        private TableColumn<Transaccion, LocalDate> colFecha;
-
-        @FXML
-        private TableColumn<Transaccion, Double> colMonto;
-
-        @FXML
-        private ComboBox<String> comboCategoria;
-
-        @FXML
-        private ComboBox<String> comboPeriodo;
-
-        @FXML
-        private Label lblPromedio;
-
-        @FXML
-        private Label lblTotal;
-
-        @FXML
-        private PieChart pieChartGastos;
-
-        @FXML
-        private TableView<Transaccion> tableGastos;
-
-        private AnalizadorGastos analizador;
-        private Cliente cliente;
-
-        public void setCliente(Cliente cliente) {
+    @Override
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        inicializarVista();
+        this.analizador = new AnalizadorGastos(cliente);
+
+        if (!vistaInicializada) {
+            inicializarVista();
+            vistaInicializada = true;
+        }
+
+        actualizarVista();
     }
 
+    private void inicializarVista() {
 
-        private void inicializarVista() {
+        comboPeriodo.getItems().addAll(
+                "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+        );
 
-            comboPeriodo.getItems().addAll("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-            comboCategoria.getItems().addAll("Retiro","Depósito","Transferencia");
+        comboCategoria.getItems().addAll("Depósito","Retiro","Transferencia");
 
-            colFecha.setCellValueFactory(data -> new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getFecha()));
-            colCategoria.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getClass().getSimpleName()));
-            colConcepto.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getConcepto()));
-            colMonto.setCellValueFactory(data -> new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getValor()));
+        colFecha.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getFecha()));
 
+        colCategoria.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getClass().getSimpleName()));
 
-            btnActualizar.setOnAction(e -> actualizarVista());
-        }
+        colConcepto.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getConcepto()));
 
-        private void actualizarVista() {
-            if (analizador == null) return;
+        colMonto.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getValor()));
 
-            int mesSeleccionado = comboPeriodo.getSelectionModel().getSelectedIndex() + 1;
-            String categoriaSeleccionada = comboCategoria.getValue();
+        btnActualizar.setOnAction(e -> actualizarVista());
+    }
 
-            List<Transaccion> transacciones = analizador.getCliente()
-                    .getCuentas()
-                    .stream()
-                    .flatMap(c -> c.consultaTransacciones().stream())
-                    .toList();
-            List<Transaccion> filtradas = transacciones.stream()
-                    .filter(t -> t.getFecha().getMonthValue() == mesSeleccionado)
-                    .filter(t -> categoriaSeleccionada == null || t.getClass().getSimpleName().equals(categoriaSeleccionada))
-                    .toList();
-            tableGastos.setItems(FXCollections.observableArrayList(filtradas));
-            pieChartGastos.getData().clear();
-            double total = filtradas.stream().mapToDouble(Transaccion::getValor).sum();
-            pieChartGastos.getData().add(new PieChart.Data(categoriaSeleccionada != null ? categoriaSeleccionada : "Todos", total));
-            lblTotal.setText("Total: " + total);
-            lblPromedio.setText("Promedio mensual: " + analizador.calcularPromedioGastoMensual(LocalDate.now().getYear()));
-        }
+    private void actualizarVista() {
+        if (cliente == null || analizador == null) return;
+
+        Integer mes = comboPeriodo.getSelectionModel().getSelectedIndex() + 1;
+        String categoriaSeleccionada = comboCategoria.getValue();
+
+        List<Transaccion> lista = cliente.getCuentas()
+                .stream()
+                .flatMap(c -> c.consultaTransacciones().stream())
+                .toList();
+
+        List<Transaccion> filtradas = lista.stream()
+                .filter(t -> mes == 0 || t.getFecha().getMonthValue() == mes)
+                .filter(t -> categoriaSeleccionada == null
+                        || t.getClass().getSimpleName().equals(categoriaSeleccionada))
+                .toList();
+
+        tableGastos.setItems(FXCollections.observableArrayList(filtradas));
+
+        pieChartGastos.getData().clear();
+        double total = filtradas.stream().mapToDouble(Transaccion::getValor).sum();
+
+        pieChartGastos.getData().add(
+                new PieChart.Data(
+                        categoriaSeleccionada == null ? "Todos" : categoriaSeleccionada,
+                        total
+                )
+        );
+
+        lblTotal.setText("Total: " + total);
+        lblPromedio.setText(
+                "Promedio mensual: " + analizador.calcularPromedioGastoMensual(LocalDate.now().getYear())
+        );
+    }
+
     @FXML
     public void Volveraction(ActionEvent event) {
         try {
@@ -105,10 +115,11 @@ public class AnalizadorGastosController {
             );
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            VistaPrincipalController menu = loader.getController();
+            menu.setCliente(cliente);
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.setTitle("Menú Principal");
             stage.show();
 
@@ -117,4 +128,4 @@ public class AnalizadorGastosController {
             System.out.println("ERROR retornando al menú: " + e.getMessage());
         }
     }
-    }
+}

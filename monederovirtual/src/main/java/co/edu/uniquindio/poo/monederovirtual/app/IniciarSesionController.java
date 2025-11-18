@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -13,53 +11,45 @@ import model.BaseInformacionCliente;
 import model.Cliente;
 
 public class IniciarSesionController {
-    @FXML
-    private TextField txtUsuario;
+        @FXML
+        private TextField txtUsuario;
 
-    @FXML
-    private PasswordField txtContrasena;
-
-    @FXML
-    private Label lblMensaje;
-
-    @FXML
-    private Button btnIngresar;
+        @FXML
+        private PasswordField txtContrasena;
 
     @FXML
     private void IniciarSesionaction() {
-        String cedula = txtUsuario.getText();
-        String pass = txtContrasena.getText();
-        if (cedula.isEmpty() || pass.isEmpty()) {
-            lblMensaje.setText("Completa todos los campos.");
-            return;
-        }
-        Cliente cliente = BaseInformacionCliente.validarLogin(cedula, pass);
 
-        if (cliente == null) {
-            lblMensaje.setText("Cédula o contraseña incorrecta.");
-            return;
+        String usuario = txtUsuario.getText();
+        String clave = txtContrasena.getText();
+
+        Cliente cliente = BaseInformacionCliente.validarLogin(usuario, clave);
+
+        if (cliente != null) {
+            abrirMenu(cliente);
+        } else {
+            System.out.println("Usuario o contraseña incorrectos.");
         }
-        ((Stage) btnIngresar.getScene().getWindow()).close();
-        abrirMenu(cliente);
     }
 
     private void abrirMenu(Cliente cliente) {
-        try {FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
-        );
-
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml"));
             Parent root = loader.load();
-            MenuPrincipalController menuController = loader.getController();
-            menuController.setCliente(cliente);
+
+            VistaPrincipalController controller = loader.getController();
+            controller.setCliente(cliente);
 
             Stage stage = new Stage();
-            stage.setTitle("Menú Principal");
             stage.setScene(new Scene(root));
+            stage.setTitle("Menú Principal");
             stage.show();
+
+            ((Stage) txtUsuario.getScene().getWindow()).close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-}
-
+    }

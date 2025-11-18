@@ -16,9 +16,10 @@ import model.Cliente;
 import model.Cuenta;
 import model.Transaccion;
 
-public class ConsultarHistorialController {
+public class ConsultarHistorialController implements ClienteControlador{
 
     private Cliente clienteActivo;
+    private Cuenta cuentaActiva;
 
     @FXML
     private TableView<Transaccion> tblTransacciones;
@@ -37,18 +38,15 @@ public class ConsultarHistorialController {
 
     @FXML
     private ComboBox<Cuenta> cbCuentaHistorial;
-    public void setCliente(Cliente clienteActivo) {
-        this.clienteActivo = clienteActivo;
-        inicializarDatos(clienteActivo);
-    }
 
-    public void inicializarDatos(Cliente cliente) {
-        this.clienteActivo = cliente;
-        cbCuentaHistorial.getItems().addAll(cliente.getCuentas());
-        if (!cliente.getCuentas().isEmpty()) {
-            cbCuentaHistorial.setValue(cliente.getCuentas().get(0));
-            cargarTransacciones(cliente.getCuentas().get(0));
-        }
+    // Se ejecuta cuando los controles FXML YA están listos
+    @FXML
+    public void initialize() {
+        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colMonto.setCellValueFactory(new PropertyValueFactory<>("monto"));
+        colPuntos.setCellValueFactory(new PropertyValueFactory<>("puntosGanados"));
+
         cbCuentaHistorial.setOnAction(e -> {
             Cuenta seleccionada = cbCuentaHistorial.getValue();
             if (seleccionada != null) {
@@ -57,12 +55,31 @@ public class ConsultarHistorialController {
         });
     }
 
-    private void cargarTransacciones(Cuenta cuenta) {
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        colMonto.setCellValueFactory(new PropertyValueFactory<>("monto"));
-        colPuntos.setCellValueFactory(new PropertyValueFactory<>("puntosGanados"));
+    @Override
+    public void setCliente(Cliente cliente) {
+        this.clienteActivo = cliente;
 
+        if (cliente != null && cliente.getCuentas() != null && !cliente.getCuentas().isEmpty()) {
+            this.cuentaActiva = cliente.getCuentas().get(0);
+        }
+
+        cargarCuentas();
+    }
+
+    private void cargarCuentas() {
+        if (clienteActivo == null) return;
+
+        cbCuentaHistorial.getItems().clear();
+        cbCuentaHistorial.getItems().addAll(clienteActivo.getCuentas());
+
+        if (!clienteActivo.getCuentas().isEmpty()) {
+            Cuenta primera = clienteActivo.getCuentas().get(0);
+            cbCuentaHistorial.setValue(primera);
+            cargarTransacciones(primera);
+        }
+    }
+
+    private void cargarTransacciones(Cuenta cuenta) {
         ObservableList<Transaccion> lista =
                 FXCollections.observableArrayList(cuenta.consultaTransacciones());
         tblTransacciones.setItems(lista);
@@ -77,9 +94,7 @@ public class ConsultarHistorialController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.setTitle("Menú Principal");
             stage.show();
 
@@ -89,4 +104,3 @@ public class ConsultarHistorialController {
         }
     }
 }
-

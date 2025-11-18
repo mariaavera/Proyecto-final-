@@ -47,7 +47,6 @@ public class RegistroController {
             lblMensaje.setText("Las contraseñas no coinciden.");
             return;
         }
-
         Cliente cliente = new Cliente(nombre, cedula, pass, 0);
 
         Cuenta cuenta = new Cuenta(
@@ -75,7 +74,7 @@ public class RegistroController {
 
         lblMensaje.setText("Registro exitoso. Ahora inicia sesión.");
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(6));
+        PauseTransition pause = new PauseTransition(Duration.seconds(4));
         pause.setOnFinished(event -> cerrarVentana());
         pause.play();
     }
@@ -88,4 +87,5 @@ public class RegistroController {
         Stage stage = (Stage) btnRegistrar.getScene().getWindow();
         stage.close();
     }
+
 }

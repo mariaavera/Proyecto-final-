@@ -6,7 +6,9 @@ public class MonederoIndividual extends MonederoVirtual implements TransaccionPr
     private Cuenta cuentaOrigen;
     private Cuenta cuentaDestino;
     public MonederoIndividual(String id, double valor) {
+
         super(id, valor);
+
     }
     @Override
     public void programarTransaccion(Transaccion transaccion, LocalDate fechaEjecucion) {

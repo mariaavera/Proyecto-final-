@@ -109,5 +109,9 @@ public class Cuenta {
         historial.addAll(listaTransacciones);
         return historial;
     }
+    @Override
+    public String toString() {
+        return "Cuenta " + id;
+    }
 }
 

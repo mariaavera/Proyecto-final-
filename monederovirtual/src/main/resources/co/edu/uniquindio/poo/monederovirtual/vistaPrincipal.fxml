@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="434.0" prefWidth="521.0"
             xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.uniquindio.poo.monederovirtual.app.MenuPrincipalController">
+            fx:controller="co.edu.uniquindio.poo.monederovirtual.app.VistaPrincipalController">
 
     <children>
         <Label layoutX="44.0" prefHeight="102.0" prefWidth="434.0" text="Monedero Virtual" textAlignment="CENTER" textFill="#030feb">

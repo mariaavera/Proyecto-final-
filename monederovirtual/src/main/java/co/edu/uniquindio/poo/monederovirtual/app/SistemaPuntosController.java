@@ -1,12 +1,18 @@
 package co.edu.uniquindio.poo.monederovirtual.app;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Cliente;
 
-public class SistemaPuntosController {
-    private Cliente clienteActivo;
+public class SistemaPuntosController implements ClienteControlador{
 
     @FXML
     private Label lblPuntos;
@@ -19,21 +25,24 @@ public class SistemaPuntosController {
 
     @FXML
     private TextField txtPuntosACanjear;
+
     private Cliente cliente;
 
+    @Override
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        inicializarDatos(cliente);
-    }
 
-    public void inicializarDatos(Cliente cliente) {
-        this.clienteActivo = cliente;
+        if (cliente == null) {
+            lblMensaje.setText("Error: cliente no asignado.");
+            return;
+        }
+
         actualizarVista();
     }
 
     private void actualizarVista() {
-        lblPuntos.setText("Puntos: " + clienteActivo.getPuntos());
-        lblRango.setText("Rango: " + calcularRango(clienteActivo.getPuntos()));
+        lblPuntos.setText("Puntos: " + cliente.getPuntos());
+        lblRango.setText("Rango: " + calcularRango(cliente.getPuntos()));
     }
 
     private String calcularRango(int puntos) {
@@ -44,7 +53,7 @@ public class SistemaPuntosController {
     }
 
     @FXML
-    public void canjearPuntos() {
+    public void Canjearaction() {
         try {
             int cantidad = Integer.parseInt(txtPuntosACanjear.getText());
 
@@ -53,14 +62,14 @@ public class SistemaPuntosController {
                 return;
             }
 
-            if (clienteActivo.getPuntos() >= cantidad) {
+            if (cliente.getPuntos() >= cantidad) {
 
-                clienteActivo.descontarPuntos(cantidad);
+                cliente.descontarPuntos(cantidad);
 
                 lblMensaje.setText("Canje exitoso. Te quedan: "
-                        + clienteActivo.getPuntos() + " puntos.");
+                        + cliente.getPuntos() + " puntos.");
 
-                actualizarVista();  // <-- actualiza puntos y rango
+                actualizarVista();
 
             } else {
                 lblMensaje.setText("No tienes suficientes puntos.");
@@ -68,6 +77,29 @@ public class SistemaPuntosController {
 
         } catch (NumberFormatException e) {
             lblMensaje.setText("Ingresa un número válido.");
+        }
+    }
+
+    @FXML
+    public void Volveraction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/poo/monederovirtual/vistaPrincipal.fxml")
+            );
+            Parent root = loader.load();
+
+            VistaPrincipalController menu = loader.getController();
+            menu.setCliente(cliente);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Menú Principal");
+            stage.show();
+
+        } catch (Exception e) {
+            lblMensaje.setText("Error regresando al menú.");
+            e.printStackTrace();
         }
     }
 }

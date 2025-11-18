@@ -10,37 +10,44 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.Cuenta;
-import model.MonederoVirtual;
 
-public class DepositarDineroController {
+public class DepositarDineroController implements ClienteControlador{
 
     @FXML private TextField txtDepositoDinero;
     @FXML private Label lblMensaje;
     @FXML private ComboBox<Cuenta> cbCuentaDeposito;
 
     private Cliente cliente;
+    private Cuenta cuentaActiva;
 
+    @Override
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        cbCuentaDeposito.getItems().addAll(cliente.getCuentas());
+
+        if (cliente == null || cliente.getCuentas() == null || cliente.getCuentas().isEmpty()) {
+            System.out.println("ERROR: Cliente no tiene cuentas.");
+            return;
+        }
+
+        this.cuentaActiva = cliente.getCuentas().getFirst();
+        cbCuentaDeposito.getItems().setAll(cliente.getCuentas());
+        cbCuentaDeposito.setValue(cuentaActiva);
     }
 
     @FXML
-    public void DepositarDineroaction() {
+    private void DepositarDineroaction() {
         try {
-            Cuenta cuentaSeleccionada = cbCuentaDeposito.getValue();
+            double monto = Double.parseDouble(txtDepositoDinero.getText());
 
-            if (cuentaSeleccionada == null) {
-                lblMensaje.setText("Selecciona una cuenta para depositar.");
-                return;
+            if (cuentaActiva != null) {
+                String mensaje = cuentaActiva.depositarDinero(monto);
+                lblMensaje.setText(mensaje);
+            } else {
+                lblMensaje.setText("Seleccione una cuenta.");
             }
 
-            double monto = Double.parseDouble(txtDepositoDinero.getText());
-            String resultado = cuentaSeleccionada.depositarDinero(monto);
-            lblMensaje.setText(resultado);
-
         } catch (NumberFormatException e) {
-            lblMensaje.setText("Error: ingrese un número válido.");
+            lblMensaje.setText("Ingrese un valor válido.");
         }
     }
 
@@ -52,7 +59,7 @@ public class DepositarDineroController {
             );
 
             Parent root = loader.load();
-            MenuPrincipalController menuController = loader.getController();
+            VistaPrincipalController menuController = loader.getController();
             menuController.setCliente(cliente);
 
             Stage stage = new Stage();
@@ -61,6 +68,7 @@ public class DepositarDineroController {
             stage.show();
 
             ((Stage) txtDepositoDinero.getScene().getWindow()).close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

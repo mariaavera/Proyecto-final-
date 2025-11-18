@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import model.Cliente;
 
+import java.util.function.Consumer;
 public class LoginController {
-    @FXML
-    private Button btnRegistro;
-
-    @FXML
-    private Button btnLogin;
-
     @FXML
     private void Registrarseaction() {
         abrirVentana("/co/edu/uniquindio/poo/monederovirtual/Registro.fxml",
@@ -24,6 +22,7 @@ public class LoginController {
     private void IniciarSesionaction() {
         abrirVentana("/co/edu/uniquindio/poo/monederovirtual/IniciarSesion.fxml",
                 "Iniciar Sesión");
+
     }
 
     private void abrirVentana(String ruta, String titulo) {

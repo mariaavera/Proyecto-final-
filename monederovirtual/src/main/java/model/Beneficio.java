@@ -1,6 +1,6 @@
 package model;
 
-public class Beneficio {
+public abstract class Beneficio {
     private String nombre;
     private int puntosRequeridos;
 

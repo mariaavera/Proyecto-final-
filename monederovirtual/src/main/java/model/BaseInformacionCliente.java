@@ -49,6 +49,19 @@ public class BaseInformacionCliente {
     public static MonederoVirtual getMonederoActual() {
         return monederoActual;
     }
+    public static Cliente buscarCliente(String usuario, String clave) {
+
+        for (Cliente cliente : clientes) {
+
+            if (cliente.getNombre().equals(usuario)
+                    && cliente.getContrasena().equals(clave)) {
+
+                return cliente;
+            }
+        }
+
+        return null;
+    }
 
 }
 

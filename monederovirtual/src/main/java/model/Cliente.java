@@ -5,34 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
-        private String nombre;
-        private String cedula;
+    private String nombre;
+    private String cedula;
     private List<Cuenta> cuentas = new ArrayList<>();
-        private String contrasena;
-        private int puntos;
-        private TransaccionProgramada transaccionProgramada=null;
-        private List<MonederoVirtual> monederos;
-        private double descuentoTransferencias = 0;
-        private LocalDate retirosGratisHasta=null;
+    private String contrasena;
+    private int puntos;
+    private TransaccionProgramada transaccionProgramada = null;
+    private List<MonederoVirtual> monederos;
+    private double descuentoTransferencias = 0;
+    private LocalDate retirosGratisHasta = null;
 
-    public Cliente(String nombre, String cedula, String contrasena,int puntos) {
+    public Cliente(String nombre, String cedula, String contrasena, int puntos) {
         this.nombre = nombre;
-        this.cedula=cedula;
-        this.contrasena=contrasena;
+        this.cedula = cedula;
+        this.contrasena = contrasena;
         this.puntos = puntos;
-        this.monederos=new ArrayList<>();
+        this.monederos = new ArrayList<>();
         cuentas = new ArrayList<>();
-        cuentas.add(new Cuenta( 0.0,
-                GenerarCuentas.generarNumero(),
-                this));
     }
-    public void crearNuevaCuenta() {
+
+    public Cuenta crearNuevaCuenta(double saldoInicial) {
         Cuenta cuentaNueva = new Cuenta(
-                0.0,
+                saldoInicial,
                 GenerarCuentas.generarNumero(),
                 this
         );
         this.cuentas.add(cuentaNueva);
+        return cuentaNueva;
     }
     public String getCedula() {
         return cedula;
@@ -146,5 +145,6 @@ public class Cliente {
         System.out.println("Canje exitoso: " + beneficio.getNombre());
         return true;
     }
+
 
 }

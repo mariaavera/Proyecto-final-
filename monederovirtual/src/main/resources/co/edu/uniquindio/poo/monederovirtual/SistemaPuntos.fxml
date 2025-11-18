@@ -6,57 +6,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="378.0" prefWidth="485.0"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.uniquindio.poo.monederovirtual.app.SistemaPuntosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.monederovirtual.app.SistemaPuntosController">
 
     <children>
-        <Label fx:id="lblTitulo" layoutX="7.0" layoutY="14.0"
-               prefHeight="85.0" prefWidth="478.0"
-               text="Sistema de Puntos" textFill="#2802ff">
+
+        <Label layoutX="4.0" layoutY="41.0" prefHeight="85.0" prefWidth="478.0" text="Sistema de Puntos" textFill="#2802ff">
             <font>
                 <Font name="System Bold" size="54.0" />
             </font>
         </Label>
-        <Button fx:id="btnCanjear" layoutX="196.0" layoutY="291.0"
-                mnemonicParsing="false" text="Canjear">
-            <font>
-                <Font size="19.0" />
-            </font>
+
+        <Label layoutX="75.0" layoutY="126.0" prefHeight="28.0" prefWidth="163.0" text="Puntos actuales:">
+            <font><Font name="System Bold" size="19.0" /></font>
+        </Label>
+        <Label fx:id="lblPuntos" layoutX="257.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" />
+
+        <Label layoutX="85.0" layoutY="168.0" prefHeight="28.0" prefWidth="183.0" text="Tu rango actual es:">
+            <font><Font name="System Bold" size="19.0" /></font>
+        </Label>
+        <Label fx:id="lblRango" layoutX="257.0" layoutY="170.0" prefHeight="25.0" prefWidth="150.0" />
+
+        <Label layoutX="120.0" layoutY="216.0" prefHeight="26.0" prefWidth="246.0" text="¿Cuántos puntos desea canjear?" textFill="#0b5079">
+            <font><Font size="17.0" /></font>
+        </Label>
+
+        <TextField fx:id="txtPuntosACanjear" layoutX="163.0" layoutY="261.0" promptText="Puntos a canjear" />
+
+        <Button fx:id="btnCanjear" layoutX="193.0" layoutY="297.0" mnemonicParsing="false" onAction="#Canjearaction" text="Canjear">
+            <font><Font size="19.0" /></font>
         </Button>
-        <Label layoutX="93.0" layoutY="99.0"
-               prefHeight="28.0" prefWidth="163.0"
-               text="Puntos actuales:">
-            <font>
-                <Font name="System Bold" size="19.0" />
-            </font>
+        <Label fx:id="lblMensaje" layoutX="34.0" layoutY="346.0" prefHeight="26.0" prefWidth="433.0" textFill="#65008a">
+            <font><Font size="15.0" /></font>
         </Label>
-
-        <Label fx:id="lblPuntos" layoutX="285.0" layoutY="105.0"
-               prefHeight="25.0" prefWidth="87.0" />
-
-        <Label layoutX="88.0" layoutY="141.0"
-               prefHeight="28.0" prefWidth="183.0"
-               text="Tu rango actual es:">
-            <font>
-                <Font name="System Bold" size="19.0" />
-            </font>
-        </Label>
-
-        <Label fx:id="lblRango" layoutX="294.0" layoutY="143.0"
-               prefHeight="25.0" prefWidth="103.0" />
-
-        <Label layoutX="123.0" layoutY="189.0"
-               prefHeight="26.0" prefWidth="246.0"
-               text="¿Cuántos puntos desea canjear?"
-               textFill="#0b5079">
-            <font>
-                <Font size="17.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtPuntosACanjear" layoutX="166.0" layoutY="234.0"
-                   promptText="Puntos a canjear" />
+      <Button fx:id="btnVolver" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Volveraction" text="Volver" />
 
     </children>
 </AnchorPane>
