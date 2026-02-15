@@ -8,7 +8,7 @@ public class BeneficioRetiro extends Beneficio implements Puntos{
     }
 
     /**Sobre escribo el metodo aplicar beneficio
-     *para ejecutarlo despues
+     *para ejecutarlo despues 123
      * @param cliente
      */
     @Override
